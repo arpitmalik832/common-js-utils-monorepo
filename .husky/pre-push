@@ -1,0 +1,2 @@
+# validate branch name before push.
+npx validate-branch-name

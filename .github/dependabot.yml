@@ -1,0 +1,97 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/rollup-library-docs"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/webpack"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/webpack-swc"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/vite"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/vite-swc"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/rollup-library"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/rollup-swc-library"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/vite-library"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/vite-swc-library"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/test-apps/rollup-library-test"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/test-apps/rollup-swc-library-test"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/test-apps/vite-library-test"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/test-apps/vite-swc-library-test"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "npm"
+    directory: "/test-apps/webpack-test"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature-dependabot"

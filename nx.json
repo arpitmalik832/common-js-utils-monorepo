@@ -1,0 +1,48 @@
+{
+  "extends": "nx/presets/npm.json",
+  "npmScope": "common-js-utils-monorepo",
+  "version": "0.0.0",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "{workspaceRoot}/jest.config.js",
+        "setupFile": "{workspaceRoot}/jest.setup.js"
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    }
+  },
+  "workspaceLayout": {
+    "appsDir": ["apps", "test-apps"],
+    "libsDir": "packages"
+  }
+}

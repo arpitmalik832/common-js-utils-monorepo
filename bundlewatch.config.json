@@ -1,0 +1,43 @@
+{
+  "files": [
+    {
+      "path": "packages/rollup-library/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "packages/rollup-swc-library/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "packages/vite-library/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "packages/vite-swc-library/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "apps/vite/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "apps/vite-swc/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "apps/webpack/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "apps/webpack-swc/dist/**/*.js",
+      "maxSize": "150kB"
+    },
+    {
+      "path": "apps/rollup-library-docs/build/**/*.js",
+      "maxSize": "150kB"
+    }
+  ],
+  "ci": {
+    "trackBranches": ["development", "staging", "beta", "release", "master"]
+  }
+}

@@ -1,0 +1,80 @@
+name: Publish Rollup SWC Library
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: "Release type (release, alpha, beta, rc)"
+        required: true
+        default: "alpha"
+        type: "choice"
+        options:
+          - release
+          - alpha
+          - beta
+          - rc
+      build_type:
+        description: "Build type (prod, beta, stage)"
+        required: true
+        default: "prod"
+        type: "choice"
+        options:
+          - prod
+          - beta
+          - stage
+
+env:
+  PNPM_VERSION: 10.4.1
+  NODE_VERSION: 22
+
+jobs:
+  publish-rollup-swc-library:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Configure Git
+        run: |
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Publishing the library package
+        working-directory: packages/rollup-swc-library
+        run: |
+          git status
+          git stash pop
+          git status
+          if [ "${{ github.event.inputs.build_type }}" = "stage" ]; then
+            pnpm build
+          else
+            pnpm build:${{ github.event.inputs.build_type }}
+          fi
+          pnpm publish:${{ github.event.inputs.release_type }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Output package details
+        working-directory: packages/rollup-swc-library
+        run: cat package.json

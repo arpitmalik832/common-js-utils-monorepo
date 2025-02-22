@@ -1,0 +1,12 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+build
+dist
+distInfo
+types
+node_modules
+coverage
+storybook-static
+static/styles
+pnpm-lock.yaml

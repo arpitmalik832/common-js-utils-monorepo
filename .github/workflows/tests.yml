@@ -1,0 +1,250 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - development
+      - staging
+      - beta
+      - release
+      - master
+      - "feature-*"
+
+env:
+  PNPM_VERSION: 10.4.1
+  NODE_VERSION: 22
+
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Running dependency audit
+        run: pnpm audit
+  outdated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Running outdated
+        run: pnpm outdated
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Running lint
+        run: pnpm lint
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Running unit tests
+        run: pnpm test:coverage
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Installing cypress
+        run: npx cypress install
+      - name: Running e2e tests
+        run: pnpm e2e-run
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Building the project
+        run: pnpm build:prod
+  storybook-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Building the storybook
+        run: pnpm storybook:build:prod
+  bundle-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Building the project
+        run: pnpm build:prod
+      - name: Checking bundle size
+        run: npx bundlewatch --config bundlewatch.config.json
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+          CI_REPO_OWNER: ${{ github.repository_owner }}
+          CI_REPO_NAME: ${{ github.event.repository.name }}
+          CI_COMMIT_SHA: ${{ github.sha }}
