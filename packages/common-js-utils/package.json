@@ -163,7 +163,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-url": "^8.0.2",
     "@rollup/pluginutils": "^5.1.4",
-    "@storybook/addon-a11y": "^8.5.0",
+    "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
     "@storybook/addon-links": "^8.5.0",
