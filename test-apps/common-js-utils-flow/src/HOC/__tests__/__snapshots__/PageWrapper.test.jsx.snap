@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageWrapper unit tests PageWrapper snapshot test 1`] = `
+<div>
+  <div>
+    Page Wrapper
+    <div
+      data-testid="outlet"
+    >
+      Outlet Content
+    </div>
+  </div>
+</div>
+`;

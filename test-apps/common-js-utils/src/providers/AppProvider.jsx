@@ -3,7 +3,7 @@
  * @file This file is saved as `providers/AppProvider.jsx`.
  */
 import App from '../HOC/App';
-import store from '../redux/store/store';
+import store from '../redux/store/main';
 import ReduxProvider from './ReduxProvider';
 
 /**

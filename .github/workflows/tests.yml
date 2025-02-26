@@ -1,4 +1,7 @@
 name: Tests
+permissions:
+  contents: read
+  pull-requests: read
 
 on:
   pull_request:
@@ -11,8 +14,9 @@ on:
       - "feature-*"
 
 env:
-  PNPM_VERSION: 10.4.1
+  PNPM_VERSION: 10.5.0
   NODE_VERSION: 22
+  NX_CACHE_DIRECTORY: .nx-cache
 
 jobs:
   dependency-audit:
@@ -28,15 +32,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
@@ -56,15 +66,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
@@ -84,19 +100,27 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
+      - name: Building the packages
+        run: pnpm build:pkg
       - name: Running lint
         run: pnpm lint
   unit-tests:
@@ -112,19 +136,27 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
+      - name: Building the packages
+        run: pnpm build:pkg
       - name: Running unit tests
         run: pnpm test:coverage
   e2e-tests:
@@ -140,15 +172,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
@@ -170,15 +208,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
@@ -198,15 +242,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies
@@ -226,15 +276,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
           find . -type f -name ".npmrc" -exec sh -c '
             echo "Processing: {}"
             sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
             cat {}
           ' \;
-          # Add token to global .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
           echo "Added token to global .npmrc"
       - name: Installing dependencies

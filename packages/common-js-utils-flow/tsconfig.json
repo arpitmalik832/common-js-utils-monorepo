@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./types",
+    "rootDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "removeComments": true
+  },
+  "include": ["dist/**/*.js", "dist/**/*.cjs", "dist/**/*.mjs"],
+  "exclude": ["node_modules", "__tests__"]
+}

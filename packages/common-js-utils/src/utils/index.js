@@ -29,6 +29,5 @@ export * from './eventListeners';
 export * from './logsUtils';
 export * from './objectUtils';
 export * from './queryUtils';
-export * from './reactUtils';
 export * from './stringUtils';
 export { classNames, reportWebVitals };

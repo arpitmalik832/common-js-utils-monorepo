@@ -1,0 +1,77 @@
+name: Build
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: "Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)"
+        required: true
+        default: "packages/common-js-utils"
+        type: "choice"
+        options:
+          - packages/common-js-utils
+          - packages/common-js-utils-flow
+          - test-apps/common-js-utils
+          - test-apps/common-js-utils-flow
+      build_type:
+        description: "Build type (prod, beta, stage)"
+        required: true
+        default: "stage"
+        type: "choice"
+        options:
+          - prod
+          - beta
+          - stage
+
+env:
+  PNPM_VERSION: 10.5.0
+  NODE_VERSION: 22
+  NX_CACHE_DIRECTORY: .nx-cache
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
+      - name: Authenticating with GitHub Packages
+        run: |
+          # First find and update all .npmrc files recursively
+          find . -type f -name ".npmrc" -exec sh -c '
+            echo "Processing: {}"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
+            cat {}
+          ' \;
+          # Add token to global .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "Added token to global .npmrc"
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Building the project
+        working-directory: ${{ github.event.inputs.package_name }}
+        run: |
+          if [ "${{ github.event.inputs.build_type }}" = "stage" ]; then
+            pnpm build
+          else
+            pnpm build:${{ github.event.inputs.build_type }}
+          fi

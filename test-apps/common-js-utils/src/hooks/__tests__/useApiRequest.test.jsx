@@ -46,7 +46,7 @@ jest.mock('axios', () => ({
   },
 }));
 
-jest.mock('@arpitmalik832/common-js-utils', () => ({
+jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
   __esModule: true,
   handleRequest: jest.fn(e => e.then(res => res.data).catch(err => err)),
 }));
