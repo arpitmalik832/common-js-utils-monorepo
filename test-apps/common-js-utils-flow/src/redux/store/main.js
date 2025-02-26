@@ -11,16 +11,18 @@ type APIData = {
   headers: Record<string, string | Record<string, string>>,
   axiosInstance: AxiosInstance,
 };
+
 type ApisRedux = APIData[];
 
-type NavigationRedux = {
-  stack: VoidFunctionWithParams<mixed>[],
-};
+type NavigationRedux = VoidFunctionWithParams<mixed>[];
+
+type PageRedux = VoidFunctionWithParams<mixed>[];
 
 const store: {
   app: AppRedux,
   apis: ApisRedux,
   navigation: NavigationRedux,
+  page: PageRedux,
   sampleQuery: typeof sampleQuery.reducer,
 } = process.env.APP_ENV === APP_ENUMS.ENVS.PROD ? prodStore : devStore;
 

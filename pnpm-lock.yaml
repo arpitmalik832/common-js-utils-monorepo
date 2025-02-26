@@ -704,18 +704,6 @@ importers:
       redux-thunk:
         specifier: ^3.1.0
         version: 3.1.0(redux@5.0.1)
-      workbox-cacheable-response:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-precaching:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-routing:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-strategies:
-        specifier: ^7.3.0
-        version: 7.3.0
     devDependencies:
       '@babel/core':
         specifier: ^7.26.9
@@ -984,6 +972,18 @@ importers:
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
+      workbox-cacheable-response:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-precaching:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-routing:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-strategies:
+        specifier: ^7.3.0
+        version: 7.3.0
       workbox-webpack-plugin:
         specifier: ^7.3.0
         version: 7.3.0(@types/babel__core@7.20.5)(webpack@5.98.0)
@@ -1020,18 +1020,6 @@ importers:
       redux-thunk:
         specifier: ^3.1.0
         version: 3.1.0(redux@5.0.1)
-      workbox-cacheable-response:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-precaching:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-routing:
-        specifier: ^7.3.0
-        version: 7.3.0
-      workbox-strategies:
-        specifier: ^7.3.0
-        version: 7.3.0
     devDependencies:
       '@babel/core':
         specifier: ^7.26.9
@@ -1309,6 +1297,18 @@ importers:
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
+      workbox-cacheable-response:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-precaching:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-routing:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-strategies:
+        specifier: ^7.3.0
+        version: 7.3.0
       workbox-webpack-plugin:
         specifier: ^7.3.0
         version: 7.3.0(@types/babel__core@7.20.5)(webpack@5.98.0)

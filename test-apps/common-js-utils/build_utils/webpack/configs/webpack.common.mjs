@@ -31,8 +31,8 @@ const config = {
     chunkFilename: `${pkg.version}/js/[name].[chunkhash:8].js`,
     assetModuleFilename:
       isRelease || isBeta
-        ? `images/[path][contenthash:8][ext]`
-        : `images/[path][name].[contenthash:8][ext]`,
+        ? `${pkg.version}/images/[path][contenthash:8][ext]`
+        : `${pkg.version}/images/[path][name].[contenthash:8][ext]`,
     crossOriginLoading: 'anonymous',
   },
   cache: {

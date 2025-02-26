@@ -9,11 +9,11 @@ import type {
 
 import { SLICE_NAMES } from '../../enums/redux';
 
-interface APIData {
-  host: string;
-  headers: Record<string, string | Record<string, string>>;
-  axiosInstance: AxiosInstance;
-}
+type APIData = {
+  host: string,
+  headers: Record<string, string | Record<string, string>>,
+  axiosInstance: AxiosInstance,
+};
 
 type ApisRedux = APIData[];
 
