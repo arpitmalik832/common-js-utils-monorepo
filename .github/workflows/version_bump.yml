@@ -1,4 +1,6 @@
 name: Version Bumping
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
@@ -24,7 +26,7 @@ on:
           - rc
 
 env:
-  PNPM_VERSION: 10.4.1
+  PNPM_VERSION: 10.5.0
   NODE_VERSION: 22
 
 jobs:

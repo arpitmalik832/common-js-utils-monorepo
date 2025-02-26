@@ -1,0 +1,24 @@
+
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+$typography-scale-h1-font-size: 2rem !default;
+$typography-scale-h1-line-height: 2rem !default;
+$typography-scale-h1-letter-spacing: 0 !default;
+$typography-weight-bold: 700 !default;
+
+$typography: (
+  'typography': (
+    'scale': (
+      'h1': (
+        'font-size': $typography-scale-h1-font-size,
+        'line-height': $typography-scale-h1-line-height,
+        'letter-spacing': $typography-scale-h1-letter-spacing
+      )
+    ),
+    'weight': (
+      'bold': $typography-weight-bold
+    )
+  )
+);
