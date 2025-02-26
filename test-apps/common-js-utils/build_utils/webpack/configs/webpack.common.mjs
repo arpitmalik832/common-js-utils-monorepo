@@ -47,8 +47,11 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.m?jsx?$/,
         exclude: /node_modules/,
+        resolve: {
+          fullySpecified: false,
+        },
         use: [
           {
             loader: 'babel-loader',
@@ -234,8 +237,7 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: ['.jsx', '.js'],
-    fullySpecified: false,
+    extensions: ['.mjs', '.js', '.jsx'],
   },
 };
 

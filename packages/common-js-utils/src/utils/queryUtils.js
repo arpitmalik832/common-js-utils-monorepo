@@ -30,9 +30,10 @@ function processQueryParams(searchString) {
   return array.reduce((oldData, currentData) => {
     const split = currentData.split('=');
     const [key, value] = split;
-    // eslint-disable-next-line no-param-reassign
-    oldData[key] = value;
-    return oldData;
+    return {
+      ...oldData,
+      [key]: value,
+    };
   }, {});
 }
 

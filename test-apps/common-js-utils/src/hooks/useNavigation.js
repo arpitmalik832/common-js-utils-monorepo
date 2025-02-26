@@ -12,7 +12,7 @@ import {
   log,
 } from '@arpitmalik832/common-js-utils';
 
-import { BACK_CLICK, APP_UNMOUNT } from '../enums/app.js';
+import { BACK_CLICK, APP_UNMOUNT } from '../enums/app';
 
 /**
  * Custom hook to handle navigation in a route.

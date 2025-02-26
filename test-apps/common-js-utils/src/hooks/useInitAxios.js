@@ -1,6 +1,6 @@
 /**
  * This hook is used to initialize axios.
- * @file This file is saved as 'src/hooks/useInitAxios.js'.
+ * @file This file is saved as `src/hooks/useInitAxios.js`.
  */
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import {
   slices,
 } from '@arpitmalik832/common-js-utils';
 
-import { DEFAULT_API_TIMEOUT } from '../enums/app.js';
+import { DEFAULT_API_TIMEOUT } from '../enums/app';
 
 /**
  * This hook is used to initialize axios.

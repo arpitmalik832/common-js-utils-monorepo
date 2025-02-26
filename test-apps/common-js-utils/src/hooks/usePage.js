@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { slices, errorLog, log } from '@arpitmalik832/common-js-utils';
 
-import { BACK_CLICK } from '../enums/app.js';
+import { BACK_CLICK } from '../enums/app';
 
 /**
  * Custom hook to handle pages in a route.

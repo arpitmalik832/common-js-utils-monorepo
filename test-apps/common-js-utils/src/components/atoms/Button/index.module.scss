@@ -3,6 +3,7 @@
 
 .button {
   @include t.typography(h1, bold, var(--background-primary-50));
+
   margin: 0;
   background-color: var(--background-primary-900);
 }
