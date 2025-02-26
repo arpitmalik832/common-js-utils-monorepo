@@ -1,8 +1,16 @@
-name: Publish Rollup SWC Library
+name: Publish Package
 
 on:
   workflow_dispatch:
     inputs:
+      package_name:
+        description: "Package (packages/common-js-utils, packages/common-js-utils-flow)"
+        required: true
+        default: "packages/common-js-utils"
+        type: "choice"
+        options:
+          - packages/common-js-utils
+          - packages/common-js-utils-flow
       release_type:
         description: "Release type (release, alpha, beta, rc)"
         required: true
@@ -26,9 +34,9 @@ on:
 env:
   PNPM_VERSION: 10.5.0
   NODE_VERSION: 22
-
+  NX_CACHE_DIRECTORY: .nx-cache
 jobs:
-  publish-rollup-swc-library:
+  publish-rollup-library:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +51,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Configure Git
         run: |
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
@@ -62,7 +78,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Publishing the library package
-        working-directory: packages/rollup-swc-library
+        working-directory: ${{ github.event.inputs.package_name }}
         run: |
           git status
           git stash pop
@@ -76,5 +92,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Output package details
-        working-directory: packages/rollup-swc-library
+        working-directory: ${{ github.event.inputs.package_name }}
         run: cat package.json

@@ -1,22 +1,22 @@
-name: Publish Vite Library
+name: Build
 
 on:
   workflow_dispatch:
     inputs:
-      release_type:
-        description: "Release type (release, alpha, beta, rc)"
+      package_name:
+        description: "Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)"
         required: true
-        default: "alpha"
+        default: "packages/common-js-utils"
         type: "choice"
         options:
-          - release
-          - alpha
-          - beta
-          - rc
+          - packages/common-js-utils
+          - packages/common-js-utils-flow
+          - test-apps/common-js-utils
+          - test-apps/common-js-utils-flow
       build_type:
         description: "Build type (prod, beta, stage)"
         required: true
-        default: "prod"
+        default: "stage"
         type: "choice"
         options:
           - prod
@@ -26,9 +26,10 @@ on:
 env:
   PNPM_VERSION: 10.5.0
   NODE_VERSION: 22
+  NX_CACHE_DIRECTORY: .nx-cache
 
 jobs:
-  publish-vite-library:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,11 +44,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
-      - name: Configure Git
-        run: |
-          git remote set-url origin https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
           # First find and update all .npmrc files recursively
@@ -61,20 +65,11 @@ jobs:
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Publishing the library package
-        working-directory: packages/vite-library
+      - name: Building the project
+        working-directory: ${{ github.event.inputs.package_name }}
         run: |
-          git status
-          git stash pop
-          git status
           if [ "${{ github.event.inputs.build_type }}" = "stage" ]; then
             pnpm build
           else
             pnpm build:${{ github.event.inputs.build_type }}
           fi
-          pnpm publish:${{ github.event.inputs.release_type }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Output package details
-        working-directory: packages/vite-library
-        run: cat package.json
