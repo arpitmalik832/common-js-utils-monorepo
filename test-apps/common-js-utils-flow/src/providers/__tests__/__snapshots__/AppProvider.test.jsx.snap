@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppProvider Tests matches snapshot 1`] = `
+<div>
+  <div
+    data-testid="mock-redux-wrapper"
+  >
+    <div
+      data-testid="mock-app"
+    >
+      Mock App
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useAppMount unit tests snapshot test 1`] = `
+{
+  "rerender": [Function],
+  "result": {
+    "current": undefined,
+  },
+  "unmount": [Function],
+}
+`;

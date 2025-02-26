@@ -7,85 +7,25 @@ updates:
     target-branch: "feature-dependabot"
 
   - package-ecosystem: "npm"
-    directory: "/apps/rollup-library-docs"
+    directory: "/packages/common-js-utils"
     schedule:
       interval: "weekly"
     target-branch: "feature-dependabot"
 
   - package-ecosystem: "npm"
-    directory: "/apps/webpack"
+    directory: "/packages/common-js-utils-flow"
     schedule:
       interval: "weekly"
     target-branch: "feature-dependabot"
 
   - package-ecosystem: "npm"
-    directory: "/apps/webpack-swc"
+    directory: "/test-apps/common-js-utils"
     schedule:
       interval: "weekly"
     target-branch: "feature-dependabot"
 
   - package-ecosystem: "npm"
-    directory: "/apps/vite"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/apps/vite-swc"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/packages/rollup-library"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/packages/rollup-swc-library"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/packages/vite-library"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/packages/vite-swc-library"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/test-apps/rollup-library-test"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/test-apps/rollup-swc-library-test"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/test-apps/vite-library-test"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/test-apps/vite-swc-library-test"
-    schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
-
-  - package-ecosystem: "npm"
-    directory: "/test-apps/webpack-test"
+    directory: "/test-apps/common-js-utils-flow"
     schedule:
       interval: "weekly"
     target-branch: "feature-dependabot"
