@@ -9,6 +9,8 @@ echo "\n${Blue}=================================${NC}\n"
 
 echo "${Green}Start - lint-staged of the code.${NC}"
 
+pnpm build:pkg:prod
+
 pnpm lint-staged
 LINT_STAGED_EXIT_CODE=$?
 
