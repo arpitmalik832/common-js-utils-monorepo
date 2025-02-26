@@ -135,6 +135,7 @@ export default [
             'typescript-eslint',
             '@arpitmalik832/common-js-utils-pkg/.*\\.css$',
             '@arpitmalik832/common-js-utils-pkg/.*\\.svg$',
+            '@arpitmalik832/common-js-utils-pkg/.*\\.png$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],

@@ -140,6 +140,7 @@ export default [
             'typescript-eslint',
             '@arpitmalik832/common-js-utils-flow-pkg/.*\\.css$',
             '@arpitmalik832/common-js-utils-flow-pkg/.*\\.svg$',
+            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.png$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],

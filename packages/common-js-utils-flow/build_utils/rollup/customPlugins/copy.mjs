@@ -26,6 +26,10 @@ function config() {
         src: 'static/enums/icons_list.mjs',
         dest: 'dist',
       },
+      {
+        src: 'src/assets/*',
+        dest: 'dist/assets',
+      },
     ],
   });
 }

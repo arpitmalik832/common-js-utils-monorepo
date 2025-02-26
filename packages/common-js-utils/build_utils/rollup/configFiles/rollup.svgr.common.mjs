@@ -7,7 +7,6 @@ import progress from 'rollup-plugin-progress';
 
 import icons_list from '../../../static/enums/icons_list.mjs';
 import svgrConfig from '../../../svgr.config.mjs';
-import copyPlugin from '../customPlugins/copy.mjs';
 import { ENVS } from '../../config/index.mjs';
 import { outputPath } from '../../config/commonPaths.mjs';
 
@@ -34,7 +33,7 @@ const config = {
     },
   ],
   external: [/node_modules/], // Exclude node_modules
-  plugins: [svgr(svgrConfig), copyPlugin(), progress()],
+  plugins: [svgr(svgrConfig), progress()],
 };
 
 export default config;

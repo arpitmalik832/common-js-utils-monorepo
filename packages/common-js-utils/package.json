@@ -20,17 +20,9 @@
   "module": "dist/esm/lib.js",
   "types": "types/esm/lib.d.ts",
   "exports": {
-    "./icons/*": {
-      "types": {
-        "import": "./types/esm/assets/icons/*",
-        "require": "./types/cjs/assets/icons/*"
-      },
-      "import": "./dist/esm/assets/icons/*",
-      "require": "./dist/cjs/assets/icons/*"
-    },
-    "./images/*": {
-      "import": "./dist/esm/assets/images/*",
-      "require": "./dist/cjs/assets/images/*"
+    "./assets/*": {
+      "import": "./dist/assets/*",
+      "require": "./dist/assets/*"
     },
     ".": {
       "types": {

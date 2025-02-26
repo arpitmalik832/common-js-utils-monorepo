@@ -27,12 +27,8 @@ function config() {
         dest: 'dist',
       },
       {
-        src: 'src/assets/images/*',
-        dest: 'dist/cjs/assets/images',
-      },
-      {
-        src: 'src/assets/images/*',
-        dest: 'dist/esm/assets/images',
+        src: 'src/assets/*',
+        dest: 'dist/assets',
       },
     ],
   });
