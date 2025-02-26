@@ -116,6 +116,8 @@ jobs:
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
+      - name: Building the packages
+        run: pnpm build:pkg
       - name: Running lint
         run: pnpm lint
   unit-tests:
@@ -150,6 +152,8 @@ jobs:
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
+      - name: Building the packages
+        run: pnpm build:pkg
       - name: Running unit tests
         run: pnpm test:coverage
   e2e-tests:
