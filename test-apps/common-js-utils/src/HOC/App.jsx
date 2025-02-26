@@ -6,7 +6,7 @@ import { RouterProvider } from 'react-router';
 
 import router from '../routes';
 import useAppMount from '../hooks/useAppMount';
-import '@arpitmalik832/common-js-utils/styles/postcss-processed/index.css';
+import '@arpitmalik832/common-js-utils-pkg/styles/postcss-processed/index.css';
 
 /**
  * Main application component.

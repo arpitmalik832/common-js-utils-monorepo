@@ -1,6 +1,6 @@
 /**
  * This file is used to test the sample query.
- * @file This file is saved as 'src/redux/queries/__tests__/sampleQuery.test.js'.
+ * @file This file is saved as `src/redux/queries/__tests__/sampleQuery.test.js`.
  */
 /* eslint-disable global-require */
 import { createApi } from '@reduxjs/toolkit/query/react';
@@ -16,7 +16,7 @@ jest.mock('@reduxjs/toolkit/query/react', () => ({
   })),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils', () => ({
+jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
   queries: {
     baseQueryFn: jest.fn(() => ({
       baseQuery: 'mockedBaseQuery',

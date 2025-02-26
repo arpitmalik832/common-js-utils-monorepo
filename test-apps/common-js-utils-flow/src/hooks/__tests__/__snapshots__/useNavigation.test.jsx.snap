@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useNavigation unit tests snapshot test 1`] = `
+{
+  "clear": [Function],
+  "pop": [Function],
+  "push": [Function],
+  "replace": [Function],
+  "stack": [],
+}
+`;

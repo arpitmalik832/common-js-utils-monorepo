@@ -2,7 +2,7 @@
  * Home Page.
  * @file This file is saved as `Home/index.jsx`.
  */
-import { log } from '@arpitmalik832/common-js-utils';
+import { log } from '@arpitmalik832/common-js-utils-pkg';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
