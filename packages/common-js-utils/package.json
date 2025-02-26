@@ -51,7 +51,7 @@
     "colors-scss-to-mdx": "node scripts/colors_scss_to_mdx.js",
     "typography-scss-to-mdx": "node scripts/typography_scss_to_mdx.js",
     "generate-declarations": "tsc",
-    "build-common": "pnpm generate-styles && pnpm generate-icons-list && pnpm build-sass",
+    "build-common": "pnpm generate-styles && pnpm generate-icons-list && pnpm build-sass && pnpm prettier:fix .",
     "build": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=staging rollup -c rollup.config.js && node build_utils/scripts/updateImportForMixins.js && pnpm generate-declarations",
     "build:visualizer": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=staging INCLUDE_VISUALIZER=true rollup -c rollup.config.js && node build_utils/scripts/updateImportForMixins.js && pnpm generate-declarations",
     "build:buildStats": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=staging INCLUDE_BUILD_STATS=true rollup -c rollup.config.js && node build_utils/scripts/updateImportForMixins.js && pnpm generate-declarations",
