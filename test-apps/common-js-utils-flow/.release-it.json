@@ -4,11 +4,11 @@
   },
   "git": {
     "requireCleanWorkingDir": true,
-    "commitMessage": "chore(main): bump version to ${version}",
-    "tagName": "v${version}",
+    "commitMessage": "chore(main): bump test-apps/common-js-utils-flow version to ${version}",
+    "tagName": "v-test-apps-common-js-utils-flow-${version}",
     "push": false,
     "pushArgs": ["--follow-tags"],
-    "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog"
+    "changelog": "pnpx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog"
   },
   "hooks": {
     "before:init": ["echo 'Starting the release process...'"],

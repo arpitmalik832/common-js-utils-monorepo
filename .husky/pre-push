@@ -1,2 +1,2 @@
 # validate branch name before push.
-npx validate-branch-name
+pnpx validate-branch-name
