@@ -1,7 +1,7 @@
 // @flow
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import { handleRequest } from '@arpitmalik832/common-js-utils-flow';
+import { handleRequest } from '@arpitmalik832/common-js-utils-flow-pkg';
 
 export type RequestConfig = {
   url: string,

@@ -138,8 +138,8 @@ export default [
         {
           ignore: [
             'typescript-eslint',
-            '@arpitmalik832/common-js-utils-flow/.*\\.css$',
-            '@arpitmalik832/common-js-utils-flow/.*\\.svg$',
+            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.css$',
+            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.svg$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],

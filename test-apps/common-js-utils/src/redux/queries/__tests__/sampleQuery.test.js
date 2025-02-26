@@ -16,7 +16,7 @@ jest.mock('@reduxjs/toolkit/query/react', () => ({
   })),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils', () => ({
+jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
   queries: {
     baseQueryFn: jest.fn(() => ({
       baseQuery: 'mockedBaseQuery',

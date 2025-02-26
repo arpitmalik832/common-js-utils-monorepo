@@ -4,7 +4,7 @@
  */
 import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
-import { slices } from '@arpitmalik832/common-js-utils';
+import { slices } from '@arpitmalik832/common-js-utils-pkg';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { sampleQuery } from '../queries/sampleQuery';

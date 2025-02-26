@@ -6,7 +6,7 @@ import {
   APP_ENUMS,
   slices,
   preferredColorScheme,
-} from '@arpitmalik832/common-js-utils-flow';
+} from '@arpitmalik832/common-js-utils-flow-pkg';
 
 function useTheme() {
   const { theme } = useSelector(state => state.app);

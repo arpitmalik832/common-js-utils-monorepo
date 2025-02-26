@@ -1,6 +1,6 @@
 // @flow
 import { AxiosInstance } from 'axios';
-import { APP_ENUMS } from '@arpitmalik832/common-js-utils-flow';
+import { APP_ENUMS } from '@arpitmalik832/common-js-utils-flow-pkg';
 
 import devStore from './dev';
 import prodStore from './prod';

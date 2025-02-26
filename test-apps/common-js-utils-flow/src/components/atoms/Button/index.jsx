@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ReactComponent as StandardAccount } from '@arpitmalik832/common-js-utils-flow/icons/lg32/standardAccount.svg';
+import { ReactComponent as StandardAccount } from '@arpitmalik832/common-js-utils-flow-pkg/icons/lg32/standardAccount.svg';
 import forwardGrey from '../../../assets/images/forwardGrey.png';
 
 import s from './index.module.scss';

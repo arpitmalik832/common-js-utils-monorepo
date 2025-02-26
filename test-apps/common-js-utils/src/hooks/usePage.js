@@ -5,7 +5,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { slices, errorLog, log } from '@arpitmalik832/common-js-utils';
+import { slices, errorLog, log } from '@arpitmalik832/common-js-utils-pkg';
 
 import { BACK_CLICK } from '../enums/app';
 

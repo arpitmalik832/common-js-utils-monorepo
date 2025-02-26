@@ -9,7 +9,7 @@ import {
   APP_ENUMS,
   slices,
   preferredColorScheme,
-} from '@arpitmalik832/common-js-utils-flow';
+} from '@arpitmalik832/common-js-utils-flow-pkg';
 
 import useTheme from '../useTheme';
 
@@ -18,8 +18,8 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-flow', () => ({
-  ...jest.requireActual('@arpitmalik832/common-js-utils-flow'),
+jest.mock('@arpitmalik832/common-js-utils-flow-pkg', () => ({
+  ...jest.requireActual('@arpitmalik832/common-js-utils-flow-pkg'),
   slices: {
     appSliceActions: {
       setDarkTheme: jest.fn(),

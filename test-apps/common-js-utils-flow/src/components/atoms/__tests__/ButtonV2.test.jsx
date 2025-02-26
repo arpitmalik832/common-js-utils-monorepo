@@ -4,7 +4,7 @@
  */
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { slices } from '@arpitmalik832/common-js-utils-flow';
+import { slices } from '@arpitmalik832/common-js-utils-flow-pkg';
 import { configureStore } from '@reduxjs/toolkit';
 
 import ReduxProvider from '../../../providers/ReduxProvider';

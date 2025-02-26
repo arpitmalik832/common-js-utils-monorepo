@@ -6,7 +6,7 @@ import {
   addRequestInterceptor,
   addResponseInterceptor,
   slices,
-} from '@arpitmalik832/common-js-utils-flow';
+} from '@arpitmalik832/common-js-utils-flow-pkg';
 
 import { DEFAULT_API_TIMEOUT } from '../enums/app';
 

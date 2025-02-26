@@ -4,7 +4,7 @@
  */
 import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
-import { slices } from '@arpitmalik832/common-js-utils-flow';
+import { slices } from '@arpitmalik832/common-js-utils-flow-pkg';
 import { sampleQuery } from '../../queries/sampleQuery';
 
 let mockConfigureStore;
@@ -29,7 +29,7 @@ jest.mock('redux-logger', () => ({
   logger: jest.fn(),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-flow', () => ({
+jest.mock('@arpitmalik832/common-js-utils-flow-pkg', () => ({
   slices: {
     appSlice: { reducer: jest.fn() },
     apisSlice: { reducer: jest.fn() },

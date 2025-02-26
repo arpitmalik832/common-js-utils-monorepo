@@ -2,7 +2,7 @@
  * A button component that dispatches an action when clicked.
  * @file This file is saved as `src/components/atoms/Button/index.jsx`.
  */
-import { slices } from '@arpitmalik832/common-js-utils';
+import { slices } from '@arpitmalik832/common-js-utils-pkg';
 import { useDispatch } from 'react-redux';
 
 import s from './index.module.scss';

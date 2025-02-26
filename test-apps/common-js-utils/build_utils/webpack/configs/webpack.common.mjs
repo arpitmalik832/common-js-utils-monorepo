@@ -195,7 +195,7 @@ const config = {
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
             )?.[1];
             if (moduleName) {
-              return `vendor-${moduleName}`;
+              return `vendor${moduleName}`;
             }
             return 'vendor';
           },
