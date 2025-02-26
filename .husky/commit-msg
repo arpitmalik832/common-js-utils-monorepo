@@ -1,2 +1,2 @@
 # validate commit message before commit.
-npx --no-install commitlint --edit "$1"
+pnpx --no-install commitlint --edit "$1"

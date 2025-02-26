@@ -4,8 +4,8 @@
   },
   "git": {
     "requireCleanWorkingDir": true,
-    "commitMessage": "chore(main): bump package common-js-utils-flow version to ${version}",
-    "tagName": "v-common-js-utils-flow-pkg-${version}",
+    "commitMessage": "chore(main): bump main version to ${version}",
+    "tagName": "v-main-${version}",
     "push": false,
     "pushArgs": ["--follow-tags"],
     "changelog": "pnpx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog"
