@@ -1,0 +1,60 @@
+@use '../../styles/mixins/common' as c;
+@use '../../styles/mixins/typography' as t;
+
+.colorsContainer {
+  section {
+    @include c.flex(column, center, flex-start);
+    @include c.colGap(1rem);
+
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+
+    .sectionHeading {
+      @include t.typography(h1, bold, var(--background-primary-900));
+    }
+
+    .themeHeader {
+      @include c.flex(row, space-between, center);
+      @include c.rowGap(1rem);
+      @include t.typography(h1, bold, var(--background-primary-900));
+
+      width: 100%;
+
+      * {
+        width: 50%;
+      }
+    }
+
+    .colorsRow {
+      @include c.flex(row, space-between, center);
+      @include c.rowGap(1rem);
+
+      width: 100%;
+
+      .colorCard {
+        @include c.flex(column, flex-start, flex-start);
+        @include c.colGap(0.25rem);
+
+        overflow: hidden;
+
+        width: 50%;
+        height: 12.5rem;
+        padding: 0.5rem;
+        border: 0.0625rem solid var(--background-primary-900);
+        border-radius: 0.25rem;
+
+        .colorName {
+          @include t.typography(h1, bold, var(--background-primary-900));
+        }
+
+        .colorCode {
+          @include t.typography(h1, bold, var(--background-primary-900));
+        }
+
+        .whiteText {
+          color: var(--background-primary-50) !important;
+        }
+      }
+    }
+  }
+}

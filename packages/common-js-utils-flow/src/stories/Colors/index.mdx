@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks';
+
+import * as ColorsStories from './index.stories';
+
+<Meta of={ColorsStories} />
+
+# Colors
+
+## How to use Colors ?
+
+There are multiples ways for you to use the colors
+
+### 1. CSS Variables (Recommended approach. Comes with auto-theming)
+
+Following color variables will be added to the `:root` of your document. These variables will automatically switch its value
+based on the current theme that you are using
+
+```scss
+--background-primary-50,
+--background-primary-100,
+--background-primary-900
+```
+
+### 2. SCSS Variables
+
+You can use the exported `style-dictionary/colors.scss` file from the library with the below approach. Please note that these variables are just
+static values and you will need to manage theming support on your own if you use this.
+
+### Variables defined in `_colors.scss`
+
+```scss
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+$colors: (
+  'color-semantics-light-background-primary-50': #000000,
+  'color-semantics-light-background-primary-100': #acacac,
+  'color-semantics-light-background-primary-900': #ffffff,
+  'color-semantics-dark-background-primary-50': #ffffff,
+  'color-semantics-dark-background-primary-100': #acacac,
+  'color-semantics-dark-background-primary-900': #000000,
+);
+```

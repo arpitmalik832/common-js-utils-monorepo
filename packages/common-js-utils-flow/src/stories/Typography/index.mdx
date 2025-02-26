@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/blocks';
+
+import * as ColorsStories from './index.stories';
+
+<Meta of={ColorsStories} />
+
+# Typography
+
+## How to use Typography ?
+
+You can either refer the typography from the canvas tab and create your own css / s(a|c)ss files
+or you can use the exported `style-dictonary/typography.scss` file from the library with the below approach
+
+### Variables defined in `typography.scss`
+
+Please note that the variable names follow the below scheme
+`typography-groupName-typeName-property`
+
+```scss
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+$typography-scale-h1-font-size: 32px !default;
+$typography-scale-h1-line-height: 32px !default;
+$typography-scale-h1-letter-spacing: 0px !default;
+$typography-weight-bold: 700 !default;
+
+$typography: (
+  'typography': (
+    'scale': (
+      'h1': (
+        'font-size': $typography-scale-h1-font-size,
+        'line-height': $typography-scale-h1-line-height,
+        'letter-spacing': $typography-scale-h1-letter-spacing,
+      ),
+    ),
+    'weight': (
+      'bold': $typography-weight-bold,
+    ),
+  ),
+);
+```

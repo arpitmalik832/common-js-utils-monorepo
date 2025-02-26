@@ -1,10 +1,10 @@
 /**
  * This file is used to create a sample query.
- * @file This file is saved as 'src/redux/queries/sampleQuery.js'.
+ * @file This file is saved as `src/redux/queries/sampleQuery.js`.
  */
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import baseQueryFn from './baseQueryFn.js';
+import baseQueryFn from './baseQueryFn';
 
 const sampleQuery = createApi({
   reducerPath: 'sampleQuery',

@@ -1,6 +1,6 @@
 /**
  * This file is used to test the bootstrap file.
- * @file This file is saved as 'src/__tests__/bootstrap.test.jsx'.
+ * @file This file is saved as `src/__tests__/bootstrap.test.jsx`.
  */
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
