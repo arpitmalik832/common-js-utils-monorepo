@@ -1,6 +1,6 @@
 /**
  * This file is used to test the index file.
- * @file This file is saved as 'src/__tests__/index.test.js'.
+ * @file This file is saved as `src/__tests__/index.test.js`.
  */
 // Mock modules
 const mockErrorLog = jest.fn();
@@ -9,25 +9,25 @@ const mockReportWebVitals = jest.fn();
 const mockMount = jest.fn();
 
 // Mock the library
-jest.mock('@arpitmalik832/common-js-utils', () => ({
+jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
   errorLog: mockErrorLog,
   SWRegistration: {
     register: mockRegister,
   },
   reportWebVitals: mockReportWebVitals,
+  APP_ENUMS: {
+    ENVS: {
+      PROD: 'production',
+      DEV: 'development',
+      STG: 'staging',
+      BETA: 'beta',
+    },
+  },
 }));
 
 // Mock bootstrap
-jest.mock('../bootstrap.jsx', () => ({
+jest.mock('../bootstrap', () => ({
   mount: mockMount,
-}));
-
-// Mock config
-jest.mock('../../build_utils/config/index.mjs', () => ({
-  ENVS: {
-    PROD: 'production',
-    DEV: 'development',
-  },
 }));
 
 describe('Application Entry Point', () => {
@@ -152,7 +152,7 @@ describe('Application Entry Point', () => {
     it('should handle bootstrap import error', async () => {
       // Mock bootstrap to throw error
       jest.resetModules();
-      jest.mock('../bootstrap.jsx', () => {
+      jest.mock('../bootstrap', () => {
         throw new Error('Bootstrap import failed');
       });
 

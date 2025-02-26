@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../../../static/styles/style-dictionary/typography' as t;
+
+@mixin typography($scale, $weight, $color) {
+  font-size: map.get(t.$typography, 'typography', 'scale', $scale, 'font-size');
+  font-weight: map.get(t.$typography, 'typography', 'weight', $weight);
+  line-height: map.get(
+    t.$typography,
+    'typography',
+    'scale',
+    $scale,
+    'line-height'
+  );
+  color: $color;
+  letter-spacing: map.get(
+    t.$typography,
+    'typography',
+    'scale',
+    $scale,
+    'letter-spacing'
+  );
+}

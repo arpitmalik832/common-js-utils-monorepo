@@ -1,0 +1,19 @@
+@use './variables';
+@use './modified_normalize';
+
+.zeroPadding {
+  padding: 0;
+}
+
+.zeroMargin {
+  margin: 0;
+}
+
+.zeroHorizontalMargin {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.fullWidth {
+  width: 100%;
+}

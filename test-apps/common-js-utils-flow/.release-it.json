@@ -1,0 +1,24 @@
+{
+  "npm": {
+    "publish": false
+  },
+  "git": {
+    "requireCleanWorkingDir": true,
+    "commitMessage": "chore(main): bump version to ${version}",
+    "tagName": "v${version}",
+    "push": false,
+    "pushArgs": ["--follow-tags"],
+    "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog"
+  },
+  "hooks": {
+    "before:init": ["echo 'Starting the release process...'"],
+    "after:bump": ["git add ."],
+    "after:release": ["echo 'Release process completed successfully.'"]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}
