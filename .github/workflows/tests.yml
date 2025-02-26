@@ -192,7 +192,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Installing cypress
-        run: npx cypress install
+        run: pnpx cypress install
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
@@ -298,7 +298,7 @@ jobs:
       - name: Building the project
         run: pnpm build:prod
       - name: Checking bundle size
-        run: npx bundlewatch --config bundlewatch.config.json
+        run: pnpx bundlewatch --config bundlewatch.config.json
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
           CI_REPO_OWNER: ${{ github.repository_owner }}
