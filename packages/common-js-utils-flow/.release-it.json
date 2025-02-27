@@ -1,6 +1,8 @@
 {
+  "$schema": "https://raw.githubusercontent.com/release-it/release-it/main/schema/release-it.json",
   "npm": {
-    "publish": false
+    "publish": false,
+    "publishPath": "https://npm.pkg.github.com"
   },
   "git": {
     "requireCleanWorkingDir": true,
