@@ -119,7 +119,7 @@
     "version-bump:patch:release": "pnpx release-it patch --ci",
     "version-bump:minor:release": "pnpx release-it minor --ci",
     "version-bump:major:release": "pnpx release-it major --ci",
-    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci",
+    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --verbose --ci",
     "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci",
     "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci",
     "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci",
