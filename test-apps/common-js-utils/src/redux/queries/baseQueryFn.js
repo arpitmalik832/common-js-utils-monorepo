@@ -2,7 +2,7 @@
  * Base query for making get requests.
  * @file This file is saved as `baseQuery.js`.
  */
-import useApiRequest from '../../hooks/useApiRequest.js';
+import useApiRequest from '../../hooks/useApiRequest';
 
 const baseQueryFn =
   () =>

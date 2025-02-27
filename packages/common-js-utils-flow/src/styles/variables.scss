@@ -1,0 +1,35 @@
+@use 'sass:string';
+@use '../../static/styles/style-dictionary/colors' as c;
+@use '../../static/styles/style-dictionary/typography' as t;
+
+:root {
+  @each $property, $value in c.$colors {
+    @if string.index($property, 'color-semantics-light-') == 1 {
+      --#{string.slice($property, 23)}: #{$value};
+    }
+  }
+
+  @each $category, $styles in t.$typography {
+    @each $style, $properties in $styles {
+      @if $style == 'weight' {
+        @each $property, $value in $properties {
+          --#{$category}-#{$style}-#{$property}: #{$value};
+        }
+      } @else {
+        @each $property, $values in $properties {
+          @each $item, $value in $values {
+            --#{$category}-#{$style}-#{$property}-#{$item}: #{$value};
+          }
+        }
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @each $property, $value in c.$colors {
+      @if string.index($property, 'color-semantics-dark-') == 1 {
+        --#{string.slice($property, 22)}: #{$value};
+      }
+    }
+  }
+}
