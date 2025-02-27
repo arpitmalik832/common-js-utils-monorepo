@@ -8,7 +8,6 @@
     "requireCleanWorkingDir": true,
     "commitMessage": "chore(main): bump package common-js-utils version to ${version}",
     "tagName": "v-common-js-utils-pkg-${version}",
-    "push": false,
     "pushArgs": ["--follow-tags"],
     "changelog": "pnpx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog"
   },
