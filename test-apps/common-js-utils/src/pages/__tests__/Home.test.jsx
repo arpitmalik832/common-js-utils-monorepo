@@ -4,7 +4,7 @@
  */
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { log } from '@arpitmalik832/common-js-utils';
+import { log } from '@arpitmalik832/common-js-utils-pkg';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {
@@ -17,9 +17,9 @@ import useNavigation from '../../hooks/useNavigation';
 import Home from '../Home';
 
 // Mock the library components and hooks
-jest.mock('@arpitmalik832/common-js-utils', () => ({
+jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
   __esModule: true,
-  ...jest.requireActual('@arpitmalik832/common-js-utils'),
+  ...jest.requireActual('@arpitmalik832/common-js-utils-pkg'),
   log: jest.fn(),
 }));
 

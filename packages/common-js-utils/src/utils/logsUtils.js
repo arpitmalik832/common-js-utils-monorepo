@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * This file contains utility functions for logging.
  * @file This file is saved as `logsUtils.js`.
@@ -12,7 +13,6 @@ import { ENVS } from '../enums/app';
  */
 function log(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.log(...args);
   }
 }
@@ -25,7 +25,6 @@ function log(...args) {
  */
 function errorLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.error(...args);
   }
 }
@@ -38,7 +37,6 @@ function errorLog(...args) {
  */
 function warnLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.warn(...args);
   }
 }
@@ -51,7 +49,6 @@ function warnLog(...args) {
  */
 function debugLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.debug(...args);
   }
 }
@@ -64,7 +61,6 @@ function debugLog(...args) {
  */
 function traceLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.trace(...args);
   }
 }
@@ -77,7 +73,6 @@ function traceLog(...args) {
  */
 function tableLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.table(args);
   }
 }
@@ -90,21 +85,18 @@ function tableLog(...args) {
  */
 function infoLog(...args) {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.info(...args);
   }
 }
 
 const timeLog = label => {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.time(label);
   }
 };
 
 const timeEndLog = label => {
   if (process.env.APP_ENV !== ENVS.PROD) {
-    // eslint-disable-next-line no-console
     console.timeEnd(label);
   }
 };

@@ -31,8 +31,8 @@ const config = {
     chunkFilename: `${pkg.version}/js/[name].[chunkhash:8].js`,
     assetModuleFilename:
       isRelease || isBeta
-        ? `images/[path][contenthash:8][ext]`
-        : `images/[path][name].[contenthash:8][ext]`,
+        ? `${pkg.version}/images/[path][contenthash:8][ext]`
+        : `${pkg.version}/images/[path][name].[contenthash:8][ext]`,
     crossOriginLoading: 'anonymous',
   },
   cache: {
@@ -47,8 +47,11 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.m?jsx?$/,
         exclude: /node_modules/,
+        resolve: {
+          fullySpecified: false,
+        },
         use: [
           {
             loader: 'babel-loader',
@@ -192,7 +195,7 @@ const config = {
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
             )?.[1];
             if (moduleName) {
-              return `vendor-${moduleName}`;
+              return `vendor${moduleName}`;
             }
             return 'vendor';
           },
@@ -234,8 +237,7 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: ['.jsx', '.js'],
-    fullySpecified: false,
+    extensions: ['.mjs', '.js', '.jsx'],
   },
 };
 
