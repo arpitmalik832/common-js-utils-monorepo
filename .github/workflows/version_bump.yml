@@ -1,8 +1,21 @@
-name: Version Bumping
+name: Version Bump
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
     inputs:
+      package_name:
+        description: "Package (/, packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)"
+        required: true
+        default: "packages/common-js-utils"
+        type: "choice"
+        options:
+          - /
+          - packages/common-js-utils
+          - packages/common-js-utils-flow
+          - test-apps/common-js-utils
+          - test-apps/common-js-utils-flow
       version_bump_type:
         description: "Version bump type (patch, minor, major)"
         required: true
@@ -24,7 +37,7 @@ on:
           - rc
 
 env:
-  PNPM_VERSION: 10.4.1
+  PNPM_VERSION: 10.5.0
   NODE_VERSION: 22
 
 jobs:
@@ -62,6 +75,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Bumping the version
+        working-directory: ${{ github.event.inputs.package_name }}
         run: |
           git status
           git stash

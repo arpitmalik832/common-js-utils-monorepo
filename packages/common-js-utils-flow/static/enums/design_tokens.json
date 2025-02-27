@@ -1,0 +1,90 @@
+{
+  "color-primitives": {
+    "black": {
+      "50": {
+        "type": "color",
+        "value": "#000"
+      },
+      "100": {
+        "type": "color",
+        "value": "#acacac"
+      },
+      "900": {
+        "type": "color",
+        "value": "#fff"
+      }
+    },
+    "white": {
+      "50": {
+        "type": "color",
+        "value": "#fff"
+      },
+      "100": {
+        "type": "color",
+        "value": "#acacac"
+      },
+      "900": {
+        "type": "color",
+        "value": "#000"
+      }
+    }
+  },
+  "color-semantics": {
+    "light": {
+      "background": {
+        "primary": {
+          "50": {
+            "type": "color",
+            "value": "{color-primitives.black.50}"
+          },
+          "100": {
+            "type": "color",
+            "value": "{color-primitives.black.100}"
+          },
+          "900": {
+            "type": "color",
+            "value": "{color-primitives.black.900}"
+          }
+        }
+      }
+    },
+    "dark": {
+      "background": {
+        "primary": {
+          "50": {
+            "type": "color",
+            "value": "{color-primitives.white.50}"
+          },
+          "100": {
+            "type": "color",
+            "value": "{color-primitives.white.100}"
+          },
+          "900": {
+            "type": "color",
+            "value": "{color-primitives.white.900}"
+          }
+        }
+      }
+    }
+  },
+  "typography": {
+    "scale": {
+      "h1": {
+        "font-size": {
+          "value": "2rem"
+        },
+        "line-height": {
+          "value": "2rem"
+        },
+        "letter-spacing": {
+          "value": "0"
+        }
+      }
+    },
+    "weight": {
+      "bold": {
+        "value": 700
+      }
+    }
+  }
+}

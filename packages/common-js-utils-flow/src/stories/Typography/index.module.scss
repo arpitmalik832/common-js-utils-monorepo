@@ -1,0 +1,70 @@
+@use '../../styles/mixins/common' as c;
+@use '../../styles/mixins/typography' as t;
+
+.typeContainer {
+  @include c.flex(column, center, stretch);
+  @include c.colGap(1.5rem);
+
+  padding: 0 1rem 1rem;
+
+  .section {
+    @include c.flex(column, center, stretch);
+    @include c.colGap(0.5rem);
+
+    .sectionHeading {
+      @include t.typography(h1, bold, var(--background-primary-900));
+    }
+
+    &.scaleSection {
+      .scaleTable {
+        border-collapse: collapse;
+        width: 100%;
+
+        th,
+        td {
+          padding: 0.25rem 0.5rem;
+          border: 0.0625rem solid var(--background-primary-900);
+        }
+
+        thead {
+          @include t.typography(h1, bold, var(--background-primary-900));
+
+          text-align: left;
+          vertical-align: text-top;
+        }
+
+        tbody {
+          @include t.typography(h1, bold, var(--background-primary-900));
+        }
+      }
+    }
+
+    &.weightSection {
+      .sectionBody {
+        display: grid;
+        grid-gap: 1rem 0.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(22.1875rem, 1fr));
+        justify-content: space-between;
+
+        .weightContainer {
+          @include c.flex(column, center, center);
+          @include c.colGap(0.25rem);
+
+          .weightName {
+            @include t.typography(h1, bold, var(--background-primary-900));
+          }
+
+          .weightDemoContainer {
+            @include c.flex(column, center, flex-start);
+            @include c.colGap(0.25rem);
+
+            width: 100%;
+            padding: 0.25rem 0.5rem;
+            border: 0.0625rem solid var(--background-primary-900);
+            color: var(--background-primary-900);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@use '@arpitmalik832/common-js-utils-flow-pkg/styles/mixins/typography' as t;
+@use '@arpitmalik832/common-js-utils-flow-pkg/styles/mixins/common' as c;
+
+.button {
+  @include t.typography(h1, bold, var(--background-primary-50));
+
+  margin: 0;
+  background-color: var(--background-primary-900);
+}
