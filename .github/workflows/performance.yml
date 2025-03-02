@@ -79,7 +79,7 @@ jobs:
         id: collect
         run: |
           echo "table<<EOF" >> $GITHUB_OUTPUT
-          pnpx nx run @arpitmalik832/build-modules:size_compare -- ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} >> markdown
+          pnpx nx run @arpitmalik832/build-modules:size-compare -- ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} >> markdown
           cat markdown >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       - name: Post comment
