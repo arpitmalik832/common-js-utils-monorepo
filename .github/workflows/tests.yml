@@ -192,7 +192,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Installing Cypress binary
-        run: pnpm cypress install
+        run: pnpx cypress install
       - name: Installing Xvfb
         run: |
           sudo apt-get update
