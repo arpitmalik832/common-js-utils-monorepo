@@ -81,9 +81,11 @@ jobs:
         run: |
           pnpx nx run @arpitmalik832/build-modules:size-compare -- ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} ${{ env.OUTPUT_PATH}}
 
-          echo "table<<ENDOFMARKDOWN" >> $GITHUB_OUTPUT
-          cat ${{ env.OUTPUT_PATH }} >> $GITHUB_OUTPUT
-          echo "ENDOFMARKDOWN" >> $GITHUB_OUTPUT
+          # Escape the content to avoid delimiter issues
+          ESCAPED_CONTENT=$(cat ${{ env.OUTPUT_PATH }} | sed 's/%/%25/g' | sed 's/\r/%0D/g' | sed 's/\n/%0A/g')
+          echo "table<<EOF" >> $GITHUB_OUTPUT
+          echo "$ESCAPED_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       - name: Upload benchmark files
         uses: actions/upload-artifact@v4
         with:
