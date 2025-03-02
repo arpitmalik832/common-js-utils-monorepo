@@ -10,6 +10,7 @@ packages/*/types
 packages/*/coverage
 packages/*/storybook-static
 packages/*/static/styles
+packages/*/flow-typed/npm
 test-apps/*/node_modules
 test-apps/*/build
 test-apps/*/dist
@@ -18,4 +19,5 @@ test-apps/*/types
 test-apps/*/coverage
 test-apps/*/storybook-static
 test-apps/*/static/styles
+test-apps/*/flow-typed/npm
 **/*.md
