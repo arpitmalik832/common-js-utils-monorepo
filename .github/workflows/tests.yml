@@ -185,6 +185,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
             ${{ runner.os }}-nx-
+      - name: Cypress binary cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
       - name: Authenticating with GitHub Packages
         run: |
           find . -type f -name ".npmrc" -exec sh -c '
@@ -200,7 +207,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: test-apps/${{ matrix.test-apps }}
-          install: false
+          install: true
+          runTests: false
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
