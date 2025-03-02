@@ -66,9 +66,16 @@ function getAllFiles(dir) {
  * const sizes = getSizes(files);
  */
 function getSizes(dirs) {
+  console.log('Getting sizes for dirs:', JSON.stringify(dirs, null, 2));
   return dirs.map(dir => {
+    console.log('Getting sizes of files in:', dir);
     const files = getAllFiles(dir);
-
+    console.log(
+      'Files found in dir:',
+      dir,
+      ' -> ',
+      JSON.stringify(files, null, 2),
+    );
     const results = files.map(file => {
       try {
         const code = fs.readFileSync(file);
@@ -111,6 +118,12 @@ function getSizes(dirs) {
         };
       }
     });
+    console.log(
+      'Results for files in dir:',
+      dir,
+      ' -> ',
+      JSON.stringify(results, null, 2),
+    );
 
     const aggrResult = results.reduce(
       (acc, item) => {
@@ -123,6 +136,13 @@ function getSizes(dirs) {
         };
       },
       { size: 0, minified: 0, compressed: 0 },
+    );
+
+    console.log(
+      'Aggregated results for dir:',
+      dir,
+      ' -> ',
+      JSON.stringify(aggrResult, null, 2),
     );
 
     return {
@@ -175,4 +195,5 @@ if (!fs.existsSync(dirpath)) {
 const outpath = outfile || filepath;
 fs.writeFileSync(outpath, `${aggregatedResultsString}\n`);
 
+console.log('Results:', aggregatedResultsString);
 console.log('Results written to', outpath);

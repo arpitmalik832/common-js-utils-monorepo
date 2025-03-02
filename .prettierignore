@@ -2,6 +2,20 @@
 
 # Compiled output
 node_modules
-packages
-test-apps
+packages/*/node_modules
+packages/*/build
+packages/*/dist
+packages/*/distInfo
+packages/*/types
+packages/*/coverage
+packages/*/storybook-static
+packages/*/static/styles
+test-apps/*/node_modules
+test-apps/*/build
+test-apps/*/dist
+test-apps/*/distInfo
+test-apps/*/types
+test-apps/*/coverage
+test-apps/*/storybook-static
+test-apps/*/static/styles
 **/*.md
