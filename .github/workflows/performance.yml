@@ -82,6 +82,14 @@ jobs:
           pnpx nx run @arpitmalik832/build-modules:size-compare -- ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} >> markdown
           cat markdown >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+      - name: Upload benchmark files
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-files-${{ github.run_id }}
+          path: |
+            ${{ env.BASE_JSON }}
+            ${{ env.PATCH_JSON }}
+          retention-days: 7 # Keep artifacts for 7 days
       - name: Post comment
         uses: edumserrano/find-create-or-update-comment@v3
         with:
