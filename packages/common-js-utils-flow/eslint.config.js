@@ -42,6 +42,7 @@ export default [
       '**/*.md',
       'distInfo/*',
       'flow-typed/npm/*',
+      '.logs/*',
     ],
   },
   {

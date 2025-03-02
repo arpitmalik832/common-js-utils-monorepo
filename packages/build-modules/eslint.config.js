@@ -30,6 +30,7 @@ export default [
       'coverage/*',
       '**/*.md',
       'distInfo/*',
+      '.logs/*',
     ],
   },
   {
