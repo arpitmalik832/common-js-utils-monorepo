@@ -42,13 +42,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Running dependency audit
@@ -76,13 +78,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Running outdated
@@ -110,13 +114,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the packages
@@ -146,13 +152,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the packages
@@ -182,13 +190,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Installing Cypress binary
@@ -222,13 +232,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the project
@@ -256,13 +268,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the storybook
@@ -290,13 +304,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the project

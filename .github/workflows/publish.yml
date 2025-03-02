@@ -68,15 +68,15 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          # Add token to global .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Publishing the library package
