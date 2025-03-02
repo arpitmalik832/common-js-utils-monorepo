@@ -11,7 +11,7 @@ on:
       - beta
       - release
       - master
-      - "feature-*"
+      - 'feature-*'
 
 env:
   PNPM_VERSION: 10.5.0
@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -65,7 +65,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -99,7 +99,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -120,7 +120,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the packages
-        run: pnpm build:pkg
+        run: pnpm build:pkg:prod
       - name: Running lint
         run: pnpm lint
   unit-tests:
@@ -135,7 +135,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -156,7 +156,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the packages
-        run: pnpm build:pkg
+        run: pnpm build:pkg:prod
       - name: Running unit tests
         run: pnpm test:coverage
   e2e-tests:
@@ -171,7 +171,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -191,8 +191,12 @@ jobs:
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Installing cypress
+      - name: Installing Cypress binary
         run: pnpx cypress install
+      - name: Installing Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
@@ -207,7 +211,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -241,7 +245,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -275,7 +279,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:

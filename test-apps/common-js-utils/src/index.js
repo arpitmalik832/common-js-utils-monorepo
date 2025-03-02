@@ -6,7 +6,7 @@ import {
   errorLog,
   SWRegistration,
   APP_ENUMS,
-} from '@arpitmalik832/common-js-utils-pkg';
+} from '@arpitmalik832/common-js-utils';
 
 import('./bootstrap')
   .then(({ mount }) => {
@@ -24,7 +24,7 @@ import('./bootstrap')
 SWRegistration.register();
 
 if (process.env.APP_ENV !== APP_ENUMS.ENVS.PROD) {
-  import('@arpitmalik832/common-js-utils-pkg')
+  import('@arpitmalik832/common-js-utils')
     .then(({ reportWebVitals: func }) => func())
     .catch(err => {
       errorLog(

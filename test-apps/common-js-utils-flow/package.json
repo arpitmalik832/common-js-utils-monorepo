@@ -1,7 +1,7 @@
 {
   "name": "common_js_utils_flow_test",
   "version": "0.0.0",
-  "description": "testing common-js-utils-flow-pkg",
+  "description": "testing common-js-utils-flow",
   "type": "module",
   "author": "Arpit Malik",
   "license": "MIT",
@@ -220,7 +220,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
-    "@arpitmalik832/common-js-utils-flow-pkg": "workspace:*",
+    "@arpitmalik832/common-js-utils-flow": "workspace:*",
     "@reduxjs/toolkit": "^2.6.0",
     "axios": "^1.8.1",
     "react": "^19.0.0",

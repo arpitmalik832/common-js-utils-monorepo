@@ -6,20 +6,20 @@ on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: "Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)"
+        description: 'Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)'
         required: true
-        default: "packages/common-js-utils"
-        type: "choice"
+        default: 'packages/common-js-utils'
+        type: 'choice'
         options:
           - packages/common-js-utils
           - packages/common-js-utils-flow
           - test-apps/common-js-utils
           - test-apps/common-js-utils-flow
       build_type:
-        description: "Build type (prod, beta, stage)"
+        description: 'Build type (prod, beta, stage)'
         required: true
-        default: "stage"
-        type: "choice"
+        default: 'stage'
+        type: 'choice'
         options:
           - prod
           - beta
@@ -45,7 +45,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:

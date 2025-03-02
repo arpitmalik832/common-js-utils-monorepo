@@ -2,8 +2,8 @@
  * The Button component.
  * @file The file is saved as `index.jsx`.
  */
-import { ReactComponent as StandardAccount } from '@arpitmalik832/common-js-utils-pkg/assets/icons/lg32/standardAccount.svg';
-import forwardGrey from '@arpitmalik832/common-js-utils-pkg/assets/images/forwardGrey.png';
+import { ReactComponent as StandardAccount } from '@arpitmalik832/common-js-utils/assets/icons/lg32/standardAccount.svg';
+import forwardGrey from '@arpitmalik832/common-js-utils/assets/images/forwardGrey.png';
 
 import s from './index.module.scss';
 

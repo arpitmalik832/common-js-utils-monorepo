@@ -43,6 +43,7 @@ export default [
       'storybook-static',
       '**/*.md',
       'distInfo/*',
+      '.logs/*',
     ],
   },
   {

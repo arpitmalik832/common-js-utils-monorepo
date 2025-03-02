@@ -6,4 +6,5 @@ extend-exclude = [
     "**/coverage/**",
     "**/distInfo/**",
     "**/CHANGELOG.md",
+    "**/flow-typed/**"
 ]

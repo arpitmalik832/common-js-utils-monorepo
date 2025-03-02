@@ -44,6 +44,7 @@ export default [
       '**/*.md',
       'distInfo/*',
       'flow-typed/npm/*',
+      '.logs/*',
     ],
   },
   {
@@ -138,9 +139,9 @@ export default [
         {
           ignore: [
             'typescript-eslint',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.css$',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.svg$',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.png$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.css$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.svg$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.png$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],

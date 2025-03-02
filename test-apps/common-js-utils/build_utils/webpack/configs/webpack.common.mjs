@@ -29,10 +29,7 @@ const config = {
     path: outputPath,
     filename: `${pkg.version}/js/[name].[chunkhash:8].js`,
     chunkFilename: `${pkg.version}/js/[name].[chunkhash:8].js`,
-    assetModuleFilename:
-      isRelease || isBeta
-        ? `${pkg.version}/images/[path][contenthash:8][ext]`
-        : `${pkg.version}/images/[path][name].[contenthash:8][ext]`,
+    assetModuleFilename: `${pkg.version}/assets/[name].[contenthash:8][ext]`,
     crossOriginLoading: 'anonymous',
   },
   cache: {
@@ -225,7 +222,7 @@ const config = {
     }),
     new MiniCssExtractPlugin({
       filename: `${pkg.version}/css/[name].[chunkhash:8].css`,
-      chunkFilename: `${pkg.version}/css/[id].[chunkhash:8].css`,
+      chunkFilename: `${pkg.version}/css/[name].[chunkhash:8].css`,
       ignoreOrder: true,
     }),
     new CopyPlugin({
