@@ -162,7 +162,8 @@ const sizes = getSizes(distDirs);
 const aggregatedResults = {};
 sizes.forEach(entry => {
   const { file, size, minified, compressed } = entry;
-  const filename = file.split('common-js-utils-monorepo/')[1];
+  const fileNameArr = file.split('common-js-utils-monorepo/');
+  const filename = fileNameArr[fileNameArr.length - 1];
   aggregatedResults[filename] = {
     size,
     compressed,
