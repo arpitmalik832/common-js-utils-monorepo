@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect } from 'react';
-import { log } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { log } from '@arpitmalik832/common-js-utils-flow';
 import { useSelector } from 'react-redux';
 
 import Button from '../../components/atoms/Button';

@@ -1,7 +1,7 @@
 {
   "name": "common_js_utils_test",
   "version": "0.0.0",
-  "description": "testing common-js-utils-pkg",
+  "description": "testing common-js-utils",
   "type": "module",
   "author": "Arpit Malik",
   "license": "MIT",
@@ -214,7 +214,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
-    "@arpitmalik832/common-js-utils-pkg": "workspace:*",
+    "@arpitmalik832/common-js-utils": "workspace:*",
     "@reduxjs/toolkit": "^2.6.0",
     "axios": "^1.8.1",
     "react": "^19.0.0",

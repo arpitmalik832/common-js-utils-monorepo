@@ -2,7 +2,7 @@
 import { AxiosInstance } from 'axios';
 import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
-import { slices } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { slices } from '@arpitmalik832/common-js-utils-flow';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { sampleQuery } from '../queries/sampleQuery';

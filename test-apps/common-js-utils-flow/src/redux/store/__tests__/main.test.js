@@ -2,7 +2,7 @@
  * This file is used to test the store configuration.
  * @file This file is saved as `src/redux/store/__tests__/store.test.js`.
  */
-import { APP_ENUMS } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { APP_ENUMS } from '@arpitmalik832/common-js-utils-flow';
 import devStore from '../dev';
 import prodStore from '../prod';
 
@@ -21,7 +21,7 @@ jest.mock('../prod', () => ({
   },
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-flow-pkg', () => ({
+jest.mock('@arpitmalik832/common-js-utils-flow', () => ({
   APP_ENUMS: {
     ENVS: {
       PROD: 'production',

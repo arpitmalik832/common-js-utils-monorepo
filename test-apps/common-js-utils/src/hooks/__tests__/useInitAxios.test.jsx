@@ -11,7 +11,7 @@ import {
   addRequestInterceptor,
   addResponseInterceptor,
   slices,
-} from '@arpitmalik832/common-js-utils-pkg';
+} from '@arpitmalik832/common-js-utils';
 
 import useInitAxios from '../useInitAxios';
 import { DEFAULT_API_TIMEOUT } from '../../enums/app';
@@ -27,8 +27,8 @@ jest.mock('axios', () => ({
 }));
 
 // Mock library functions
-jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
-  ...jest.requireActual('@arpitmalik832/common-js-utils-pkg'),
+jest.mock('@arpitmalik832/common-js-utils', () => ({
+  ...jest.requireActual('@arpitmalik832/common-js-utils'),
   slices: {
     apisSliceActions: {
       addNewApiData: jest.fn(payload => ({

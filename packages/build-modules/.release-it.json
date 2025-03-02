@@ -7,7 +7,7 @@
   "git": {
     "requireCleanWorkingDir": true,
     "commitMessage": "chore(main): bump package build-modules version to ${version}",
-    "tagName": "v-build-modules-pkg-${version}",
+    "tagName": "v-build-modules-${version}",
     "push": true,
     "pushArgs": ["--follow-tags"],
     "changelog": "pnpx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog",

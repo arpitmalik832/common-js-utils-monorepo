@@ -1,5 +1,5 @@
-@use '@arpitmalik832/common-js-utils-pkg/styles/mixins/typography' as t;
-@use '@arpitmalik832/common-js-utils-pkg/styles/mixins/common' as c;
+@use '@arpitmalik832/common-js-utils/styles/mixins/typography' as t;
+@use '@arpitmalik832/common-js-utils/styles/mixins/common' as c;
 
 .button {
   @include t.typography(h1, bold, var(--background-primary-50));
