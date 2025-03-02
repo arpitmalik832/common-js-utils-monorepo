@@ -192,7 +192,7 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Installing cypress
-        run: pnpx cypress install
+        uses: cypress-io/github-action@v6
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
