@@ -161,11 +161,6 @@ jobs:
         run: pnpm test:coverage
   e2e-tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        test-apps:
-          - common-js-utils
-          - common-js-utils-flow
     steps:
       - uses: actions/checkout@v4
       - name: Installing pnpm ${{ env.PNPM_VERSION }}
@@ -185,13 +180,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
             ${{ runner.os }}-nx-
-      - name: Cypress binary cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress-
       - name: Authenticating with GitHub Packages
         run: |
           find . -type f -name ".npmrc" -exec sh -c '
@@ -203,12 +191,12 @@ jobs:
           echo "Added token to global .npmrc"
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Installing cypress
-        uses: cypress-io/github-action@v6
-        with:
-          working-directory: test-apps/${{ matrix.test-apps }}
-          install: true
-          runTests: false
+      - name: Installing Cypress binary
+        run: pnpm cypress install
+      - name: Installing Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
