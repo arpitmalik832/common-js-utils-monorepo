@@ -130,4 +130,8 @@ const patchResults = args[1] ? readJsonFile(args[1]) : null;
 const mergedData = mergeData(baseResults, patchResults);
 const markdownTable = generateMarkdownTable(mergedData);
 
-console.log(markdownTable);
+const outputPath = process.argv[3] || 'markdown-table.md';
+fs.writeFileSync(outputPath, markdownTable);
+
+console.log('Results:', markdownTable);
+console.log('Results written to', outputPath);
