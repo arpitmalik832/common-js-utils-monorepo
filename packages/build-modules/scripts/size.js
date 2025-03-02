@@ -82,7 +82,7 @@ function getSizes(dirs) {
 
         if (/\.(png|jpg|jpeg|gif|svg)$/i.test(file)) {
           return {
-            file: path.relative(process.cwd(), file),
+            file,
             size: code.length,
             minified: code.length,
             compressed: code.length,
@@ -105,7 +105,7 @@ function getSizes(dirs) {
         const compressed = brotliSizePkg.sync(result);
 
         return {
-          file: path.relative(process.cwd(), file),
+          file,
           size,
           minified,
           compressed,
@@ -113,17 +113,11 @@ function getSizes(dirs) {
       } catch (error) {
         console.error(`Error processing file ${file}:`, error);
         return {
-          file: path.relative(process.cwd(), file),
+          file,
           error: error.message,
         };
       }
     });
-    console.log(
-      'Results for files in dir:',
-      dir,
-      ' -> ',
-      JSON.stringify(results, null, 2),
-    );
 
     const aggrResult = results.reduce(
       (acc, item) => {
