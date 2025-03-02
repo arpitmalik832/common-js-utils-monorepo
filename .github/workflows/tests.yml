@@ -161,6 +161,11 @@ jobs:
         run: pnpm test:coverage
   e2e-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-apps:
+          - common-js-utils
+          - common-js-utils-flow
     steps:
       - uses: actions/checkout@v4
       - name: Installing pnpm ${{ env.PNPM_VERSION }}
@@ -193,6 +198,9 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Installing cypress
         uses: cypress-io/github-action@v6
+        with:
+          working-directory: test-apps/${{ matrix.test-apps }}
+          install: false
       - name: Running e2e tests
         run: pnpm e2e-run
   build:
