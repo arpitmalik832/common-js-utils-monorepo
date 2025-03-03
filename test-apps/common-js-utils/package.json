@@ -191,7 +191,7 @@
     "storybook": "^8.6.0",
     "storybook-addon-render-modes": "^0.0.11",
     "style-loader": "^4.0.0",
-    "stylelint": "^16.14.1",
+    "stylelint": "^16.15.0",
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-hudochenkov": "^11.0.0",
     "stylelint-config-idiomatic-order": "^10.0.0",
