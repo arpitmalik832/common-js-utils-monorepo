@@ -155,7 +155,7 @@
     "@rollup/pluginutils": "^5.1.4",
     "@storybook/addon-a11y": "^8.6.0",
     "@storybook/addon-essentials": "^8.6.0",
-    "@storybook/addon-interactions": "^8.6.0",
+    "@storybook/addon-interactions": "^8.6.3",
     "@storybook/addon-links": "^8.6.0",
     "@storybook/addon-storysource": "^8.6.0",
     "@storybook/blocks": "^8.6.0",
