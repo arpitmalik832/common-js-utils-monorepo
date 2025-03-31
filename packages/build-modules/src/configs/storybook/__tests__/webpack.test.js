@@ -30,7 +30,7 @@ jest.mock('../../../enums/main.js', () => ({
   },
 }));
 
-jest.mock('../../webpack/bundleAnalyzer.js', () => ({
+jest.mock('../../webpack/bundleanalyzer.js', () => ({
   __esModule: true,
   default: jest.fn((path, type, env) => ({
     plugins: [{ name: 'BundleAnalyzerPlugin', path, type, env }],
