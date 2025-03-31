@@ -3,7 +3,7 @@
  * Generates a list of icon files.
  * @file The file is saved as `generate_icons_list.js`.
  */
-import { resolve, sep } from 'path';
+import path from 'path';
 import { readdir, writeFile } from 'fs/promises';
 
 import { iconsListPath, iconsPath } from '../config/commonPaths.mjs';
@@ -20,10 +20,10 @@ async function getIcons(dir) {
   const dirents = await readdir(dir, { withFileTypes: true });
   const files = await Promise.all(
     dirents.map(dirent => {
-      const res = resolve(dir, dirent.name);
+      const res = path.resolve(dir, dirent.name);
       return dirent.isDirectory()
         ? getIcons(res)
-        : res?.split(`${sep}icons${sep}`)[1];
+        : res?.split(`${path.sep}icons${path.sep}`)[1];
     }),
   );
   return Array.prototype.concat(...files);

@@ -11,16 +11,31 @@ import CopyPlugin from 'copy-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import path from 'path';
 
 import { entryPath, outputPath } from '../../config/commonPaths.mjs';
 import svgrConfig from '../../../svgr.config.mjs';
 import { ENVS } from '../../config/index.mjs';
 
-const filename = fileURLToPath(import.meta.url);
-const dirName = dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  return path.dirname(fileURLToPath(import.meta.url));
+}
+
+const dirname = getConfigDir();
+
 const pkg = JSON.parse(
-  readFileSync(resolve(dirName, '../../../package.json'), 'utf8'),
+  readFileSync(path.resolve(dirname, '../../../package.json'), 'utf8'),
 );
 
 const isBeta = process.env.APP_ENV === ENVS.BETA;
@@ -42,7 +57,7 @@ const config = {
     version: `${pkg.version}_${process.env.APP_ENV}`,
     store: 'pack',
     buildDependencies: {
-      config: [filename],
+      config: [getConfigDir()],
     },
   },
   devtool: isRelease || isBeta ? false : 'source-map',

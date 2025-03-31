@@ -5,8 +5,23 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  const filename = fileURLToPath(import.meta.url);
+  return path.dirname(filename);
+}
+
+const dirname = getConfigDir();
 
 const projectsPaths = [
   path.join(dirname, '../../common-js-utils/dist/cjs'),

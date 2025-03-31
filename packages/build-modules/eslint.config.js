@@ -73,16 +73,7 @@ export default [
         },
       ],
       'import/prefer-default-export': 0,
-      'import/extensions': [
-        2,
-        'ignorePackages',
-        {
-          js: 'never',
-          jsx: 'never',
-          ts: 'never',
-          tsx: 'never',
-        },
-      ],
+      'import/extensions': 0,
       'import/no-unresolved': [
         2,
         {

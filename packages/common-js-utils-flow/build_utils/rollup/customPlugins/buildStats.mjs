@@ -3,7 +3,7 @@
  * @file This file is saved as `buildStats.js`.
  */
 import { writeFileSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import path from 'path';
 import zlib from 'zlib';
 
 /**
@@ -80,7 +80,7 @@ export default function buildStats(outputPath = 'build-stats.json') {
       }
 
       // Ensure the directory exists
-      mkdirSync(dirname(outputPath), { recursive: true });
+      mkdirSync(path.dirname(outputPath), { recursive: true });
 
       writeFileSync(outputPath, JSON.stringify(stats, null, 2));
     },

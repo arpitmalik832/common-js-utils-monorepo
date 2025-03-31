@@ -3,7 +3,7 @@
  * @file The file is saved as `build_utils/webpack/customPlugins/BuildStats.mjs`.
  */
 import { writeFileSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import path from 'path';
 import zlib from 'zlib';
 
 class BuildStatsPlugin {
@@ -30,7 +30,7 @@ class BuildStatsPlugin {
       this.stats.buildDuration = Date.now() - this.startTime;
 
       // Ensure the directory exists
-      mkdirSync(dirname(this.outputPath), { recursive: true });
+      mkdirSync(path.dirname(this.outputPath), { recursive: true });
       writeFileSync(this.outputPath, JSON.stringify(this.stats, null, 2));
     });
     compiler.hooks.emit.tapAsync(

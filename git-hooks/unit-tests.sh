@@ -9,6 +9,7 @@ echo "\n${Blue}=================================${NC}\n"
 
 echo "${Green}Start - Unit testing.${NC}"
 
+pnpm build:build-modules:prod
 pnpm build:pkg:prod
 
 pnpm test:coverage:silent:quick

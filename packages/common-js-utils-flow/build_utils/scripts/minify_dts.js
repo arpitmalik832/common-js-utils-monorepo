@@ -4,11 +4,26 @@
  * @file The file is saved as `minify_dts.js`.
  */
 import { readdir, readFile, writeFile } from 'fs/promises';
-import { join, dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
-const filename = fileURLToPath(import.meta.url);
-const dirName = dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  const filename = fileURLToPath(import.meta.url);
+  return path.dirname(filename);
+}
+
+const dirname = getConfigDir();
 
 const minifyFile = async filePath => {
   try {
@@ -38,7 +53,7 @@ const minifyFile = async filePath => {
 const minifyDirectory = async dir => {
   const files = await readdir(dir, { withFileTypes: true });
   const promises = files.map(file => {
-    const filePath = join(dir, file.name);
+    const filePath = path.join(dir, file.name);
     if (file.isDirectory()) {
       return minifyDirectory(filePath);
     }
@@ -52,7 +67,7 @@ const minifyDirectory = async dir => {
 
 const main = async () => {
   try {
-    await minifyDirectory(join(dirName, '../../types'));
+    await minifyDirectory(path.join(dirname, '../../types'));
     console.log('Declaration files minified successfully.');
   } catch (error) {
     console.error('Error minifying declaration files:', error);

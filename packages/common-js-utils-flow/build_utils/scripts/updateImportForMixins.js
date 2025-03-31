@@ -4,7 +4,7 @@
  * @file This script is saved as `updateImportForMixins.js`.
  */
 import { readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
+import path from 'path';
 
 /**
  * Updates the typography SCSS file to use the correct import path.
@@ -15,7 +15,7 @@ import { join } from 'path';
  * });
  */
 async function updateTypographyUse() {
-  const filePath = join('dist', 'styles', 'mixins', 'typography.scss');
+  const filePath = path.join('dist', 'styles', 'mixins', 'typography.scss');
   try {
     let content = await readFile(filePath, 'utf8');
     content = content.replace(

@@ -5,7 +5,7 @@
 const config = {
   presets: ['@babel/preset-env'],
   plugins: [
-    '@babel/transform-runtime',
+    '@babel/plugin-transform-runtime',
     '@babel/plugin-syntax-import-assertions',
   ],
 };
