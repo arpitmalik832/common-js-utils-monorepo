@@ -37,7 +37,7 @@ jest.mock('../../webpack/bundleanalyzer.js', () => ({
   })),
 }));
 
-jest.mock('../../webpack/buildStats.js', () => ({
+jest.mock('../../webpack/buildstats.js', () => ({
   __esModule: true,
   default: jest.fn((path, type, env) => ({
     plugins: [{ name: 'BuildStatsPlugin', path, type, env }],
