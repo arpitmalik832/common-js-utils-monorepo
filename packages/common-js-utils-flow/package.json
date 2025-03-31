@@ -193,7 +193,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-storybook": "^0.11.3",
     "express": "^4.21.2",
-    "flow-bin": "^0.261.2",
+    "flow-bin": "^0.266.1",
     "glob": "^11.0.1",
     "globals": "^16.0.0",
     "hermes-eslint": "^0.26.0",
