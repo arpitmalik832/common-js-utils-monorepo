@@ -102,11 +102,13 @@ function getConfig(
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                config: [
-                  `${projectRoot}/postcss.config.js`,
-                  `${projectRoot}/postcss.config.mjs`,
+                config:
+                  `${projectRoot}/postcssConfig.js` ??
+                  `${projectRoot}/postcssConfig.mjs` ??
                   path.resolve(dirname, '../postcssConfig.js'),
-                ],
+                //  [ `${projectRoot}/postcssConfig.mjs`,
+                //   path.resolve(dirname, '../postcssConfig.js'),
+                // ],
                 ctx: {
                   env:
                     isRelease || isBeta

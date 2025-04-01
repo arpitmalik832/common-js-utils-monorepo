@@ -5,7 +5,9 @@
   @include c.flex(column, center, stretch);
   @include c.colGap(1.5rem);
 
-  padding: 0 1rem 1rem;
+  & {
+    padding: 0 1rem 1rem;
+  }
 
   .section {
     @include c.flex(column, center, stretch);
@@ -29,8 +31,10 @@
         thead {
           @include t.typography(h1, bold, var(--background-primary-900));
 
-          text-align: left;
-          vertical-align: text-top;
+          & {
+            text-align: left;
+            vertical-align: text-top;
+          }
         }
 
         tbody {
@@ -58,10 +62,12 @@
             @include c.flex(column, center, flex-start);
             @include c.colGap(0.25rem);
 
-            width: 100%;
-            padding: 0.25rem 0.5rem;
-            border: 0.0625rem solid var(--background-primary-900);
-            color: var(--background-primary-900);
+            & {
+              width: 100%;
+              padding: 0.25rem 0.5rem;
+              border: 0.0625rem solid var(--background-primary-900);
+              color: var(--background-primary-900);
+            }
           }
         }
       }

@@ -7,9 +7,11 @@
     max-width: $maxWidth;
   }
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  & {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 // Multiline ellipsis for webkit browsers
@@ -19,12 +21,14 @@
     max-height: $maxHeight;
   }
 
-  overflow: hidden; // fallback for non supported browsers
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $maxLine;
+  & {
+    overflow: hidden; // fallback for non supported browsers
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $maxLine;
 
-  white-space: normal;
+    white-space: normal;
+  }
 }
 
 // Add horizontal gap between elements
@@ -73,16 +77,18 @@
 @mixin scrollable {
   @include respond(phone);
 
-  scrollbar-width: none;
+  & {
+    scrollbar-width: none;
 
-  overflow: -moz-scrollbars-none;
-  overflow-x: scroll;
+    overflow: -moz-scrollbars-none;
+    overflow-x: scroll;
 
-  max-width: 95vw;
+    max-width: 95vw;
 
-  white-space: nowrap;
+    white-space: nowrap;
 
-  -ms-overflow-style: none;
+    -ms-overflow-style: none;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -120,31 +126,33 @@
 // for position property
 @mixin position(
   $position,
-  $top: false,
-  $right: false,
-  $bottom: false,
-  $left: false,
-  $zIndex: false
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $zIndex: null
 ) {
-  @if $top {
-    top: $top;
-  }
+  & {
+    @if $top != null {
+      top: $top;
+    }
 
-  @if $right {
-    right: $right;
-  }
+    @if $right != null {
+      right: $right;
+    }
 
-  @if $bottom {
-    bottom: $bottom;
-  }
+    @if $bottom != null {
+      bottom: $bottom;
+    }
 
-  @if $left {
-    left: $left;
-  }
+    @if $left != null {
+      left: $left;
+    }
 
-  @if $zIndex {
-    z-index: $zIndex;
-  }
+    @if $zIndex != null {
+      z-index: $zIndex;
+    }
 
-  position: $position;
+    position: $position;
+  }
 }
