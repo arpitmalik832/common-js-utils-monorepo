@@ -135,7 +135,7 @@
     "@storybook/addon-links": "^8.6.0",
     "@storybook/addon-storysource": "^8.6.0",
     "@storybook/blocks": "^8.6.0",
-    "@storybook/react-webpack5": "^8.6.0",
+    "@storybook/react-webpack5": "^8.6.12",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
