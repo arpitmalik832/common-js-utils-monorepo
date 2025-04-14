@@ -24,6 +24,7 @@ import { getDirname, getPaths } from '../../utils/index.js';
  * @param {string} env - The environment variable to check.
  * @param {string[]} windowVariablesToStrip - The window variables to strip from the code.
  * @param {Array} arrayForCopyPlugin - The array for the copy plugin.
+ * @param {Array} arrayForMinimizePlugin - The array for the minimize plugin.
  * @returns {object} The rollup config.
  * @example
  * const config = getConfig();
@@ -33,6 +34,7 @@ function getConfig(
   env,
   windowVariablesToStrip,
   arrayForCopyPlugin,
+  arrayForMinimizePlugin,
 ) {
   const paths = getPaths(projectRoot);
   const dirname = getDirname();
@@ -97,6 +99,7 @@ function getConfig(
       url(),
       svgr(svgrConfig),
       rollupPlugins.CopyPlugin(arrayForCopyPlugin),
+      rollupPlugins.MinimizePlugin(arrayForMinimizePlugin, env),
       json(),
       progress(),
     ],

@@ -125,7 +125,7 @@ describe('rollup main config', () => {
 
     // Test plugins configuration
     const plugins = config.plugins.filter(Boolean); // Remove falsy plugins
-    expect(plugins).toHaveLength(11); // All plugins except conditional ones
+    expect(plugins).toHaveLength(12); // All plugins except conditional ones
 
     // Test resolve plugin
     expect(plugins.find(p => p.name === 'node-resolve').options).toEqual({

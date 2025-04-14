@@ -15,6 +15,9 @@ import { generateFileName } from '../../../utils/index.js';
 jest.mock('fs', () => ({
   mkdirSync: jest.fn(),
   writeFileSync: jest.fn(),
+  promises: {
+    readFile: jest.fn(),
+  },
 }));
 
 jest.mock('path', () => ({

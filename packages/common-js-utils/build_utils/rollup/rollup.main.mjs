@@ -85,6 +85,7 @@ function getConfig() {
         dest: 'dist/assets',
       },
     ],
+    ['dist/styles', 'dist/styles', 'dist/icons_list.mjs', 'dist/assets'],
   );
 
   return {
