@@ -103,12 +103,9 @@ function getConfig(
             options: {
               postcssOptions: {
                 config:
-                  `${projectRoot}/postcssConfig.js` ??
-                  `${projectRoot}/postcssConfig.mjs` ??
+                  `${projectRoot}/postcss.config.js` ??
+                  `${projectRoot}/postcss.config.mjs` ??
                   path.resolve(dirname, '../postcssConfig.js'),
-                //  [ `${projectRoot}/postcssConfig.mjs`,
-                //   path.resolve(dirname, '../postcssConfig.js'),
-                // ],
                 ctx: {
                   env:
                     isRelease || isBeta
