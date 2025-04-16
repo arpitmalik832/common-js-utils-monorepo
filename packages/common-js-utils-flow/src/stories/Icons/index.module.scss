@@ -8,6 +8,7 @@
   & {
     padding: 0 1rem 1rem;
   }
+
   .iconSection {
     @include c.flex(column, flex-start, flex-start);
     @include c.colGap(0.5rem);
@@ -15,6 +16,7 @@
     & {
       width: 100%;
     }
+
     .sectionName {
       @include t.typography(h1, bold, var(--text-dark-high-emphasis));
     }
@@ -80,6 +82,7 @@
 
         background: var(--background-primary-100);
       }
+
       .titleSection {
         @include c.flex(row, space-between, center);
         @include c.rowGap(0.25rem);
