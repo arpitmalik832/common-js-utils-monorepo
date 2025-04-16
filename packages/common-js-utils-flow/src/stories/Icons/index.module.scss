@@ -5,14 +5,16 @@
   @include c.flex(column, flex-start, flex-start);
   @include c.colGap(1rem);
 
-  padding: 0 1rem 1rem;
-
+  & {
+    padding: 0 1rem 1rem;
+  }
   .iconSection {
     @include c.flex(column, flex-start, flex-start);
     @include c.colGap(0.5rem);
 
-    width: 100%;
-
+    & {
+      width: 100%;
+    }
     .sectionName {
       @include t.typography(h1, bold, var(--text-dark-high-emphasis));
     }
@@ -30,16 +32,18 @@
         @include c.flex(column, center, center);
         @include c.colGap(0.25rem);
 
-        cursor: pointer;
+        & {
+          cursor: pointer;
 
-        border: 0.0625rem solid var(--backgrounds-primary-900);
-        border-bottom: none;
-        border-radius: 0.3125rem;
+          border: 0.0625rem solid var(--backgrounds-primary-900);
+          border-bottom: none;
+          border-radius: 0.3125rem;
 
-        background: var(--background-primary-50);
-        box-shadow:
-          0 0.0625rem 0.1875rem 0 var(--background-primary-900),
-          0 0.0625rem 0.125rem 0 var(--background-primary-900);
+          background: var(--background-primary-50);
+          box-shadow:
+            0 0.0625rem 0.1875rem 0 var(--background-primary-900),
+            0 0.0625rem 0.125rem 0 var(--background-primary-900);
+        }
       }
     }
   }
@@ -47,12 +51,16 @@
   .modal {
     @include c.position(fixed, 0, 0, 0, 0);
 
-    margin: 0;
+    & {
+      margin: 0;
+    }
 
     .backdrop {
       @include c.position(absolute, 0, 0, 0, 0);
 
-      background: var(--background-primary-50);
+      & {
+        background: var(--background-primary-50);
+      }
     }
 
     .content {
@@ -60,22 +68,25 @@
       @include c.colGap(1rem);
       @include c.position(absolute, 45%, null, null, 50%);
 
-      transform: translate(-50%, -50%);
+      & {
+        transform: translate(-50%, -50%);
 
-      overflow-y: auto;
+        overflow-y: auto;
 
-      width: 90%;
-      max-height: 90%;
-      padding: 1rem;
-      border-radius: 0.5rem;
+        width: 90%;
+        max-height: 90%;
+        padding: 1rem;
+        border-radius: 0.5rem;
 
-      background: var(--background-primary-100);
-
+        background: var(--background-primary-100);
+      }
       .titleSection {
         @include c.flex(row, space-between, center);
         @include c.rowGap(0.25rem);
 
-        width: 100%;
+        & {
+          width: 100%;
+        }
 
         .iconName {
           @include t.typography(h1, bold, var(--background-primary-900));
@@ -98,29 +109,35 @@
         @include c.flex(column, flex-start, flex-start);
         @include c.colGap(0.5rem);
 
-        position: relative;
-        width: 100%;
+        & {
+          position: relative;
+          width: 100%;
+        }
 
         .code {
           @include t.typography(h1, 700, var(--background-primary-900));
 
-          overflow: hidden;
+          & {
+            overflow: hidden;
 
-          width: 100%;
-          max-width: 100%;
-          padding: 0.5rem;
-          border-radius: 0.25rem;
+            width: 100%;
+            max-width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
 
-          overflow-wrap: break-word;
+            overflow-wrap: break-word;
 
-          background: var(--background-primary-100);
+            background: var(--background-primary-100);
+          }
         }
 
         .copyIcon {
           @include c.position(absolute, null, 0, 0, null);
 
-          cursor: pointer;
-          color: var(--background-primary-900);
+          & {
+            cursor: pointer;
+            color: var(--background-primary-900);
+          }
 
           &:active {
             transform: scale(1.2);
