@@ -2,7 +2,7 @@
  * Redux store configuration for production environment.
  * @file This file is saved as `redux/store/store.prod,js`.
  */
-import { slices } from '@arpitmalik832/common-js-utils-pkg';
+import { slices } from '@arpitmalik832/common-js-utils';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { sampleQuery } from '../queries/sampleQuery';

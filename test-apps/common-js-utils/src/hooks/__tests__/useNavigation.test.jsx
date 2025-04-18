@@ -5,7 +5,7 @@
 import { renderHook, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as reactRedux from 'react-redux';
-import { slices } from '@arpitmalik832/common-js-utils-pkg';
+import { slices } from '@arpitmalik832/common-js-utils';
 
 import useNavigation from '../useNavigation';
 
@@ -29,8 +29,8 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
-  ...jest.requireActual('@arpitmalik832/common-js-utils-pkg'),
+jest.mock('@arpitmalik832/common-js-utils', () => ({
+  ...jest.requireActual('@arpitmalik832/common-js-utils'),
   log: jest.fn(),
   errorLog: jest.fn(),
   beforeUnload: {

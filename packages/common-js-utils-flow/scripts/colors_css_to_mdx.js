@@ -7,8 +7,23 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const filename = fileURLToPath(import.meta.url);
-const dirName = path.dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  const filename = fileURLToPath(import.meta.url);
+  return path.dirname(filename);
+}
+
+const dirname = getConfigDir();
 
 /**
  * Removes duplicate values from an array.
@@ -23,12 +38,12 @@ function deduplicate(array) {
 
 // Path to your CSS file
 const cssFilePath = path.join(
-  dirName,
+  dirname,
   '../static/styles/postcss-processed/index.css',
 );
 
 // Path to your mdx file
-const mdxFilePath = path.join(dirName, '../src/stories/Colors/index.mdx');
+const mdxFilePath = path.join(dirname, '../src/stories/Colors/index.mdx');
 
 // Read the CSS file
 const cssContent = fs.readFileSync(cssFilePath, 'utf8');

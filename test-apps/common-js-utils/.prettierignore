@@ -10,3 +10,4 @@ coverage
 storybook-static
 static/styles
 pnpm-lock.yaml
+.logs

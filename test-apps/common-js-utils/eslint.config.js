@@ -3,8 +3,8 @@
  * @file This file is saved as `eslint.config.js`.
  */
 import babelParser from '@babel/eslint-parser';
-import mdxParser from 'eslint-mdx';
 import globals from 'globals';
+import * as eslintMdx from 'eslint-mdx';
 import * as mdxPlugin from 'eslint-plugin-mdx';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -45,6 +45,7 @@ export default [
       'storybook-static',
       '**/*.md',
       'distInfo/*',
+      '.logs/*',
     ],
   },
   {
@@ -133,9 +134,9 @@ export default [
         {
           ignore: [
             'typescript-eslint',
-            '@arpitmalik832/common-js-utils-pkg/.*\\.css$',
-            '@arpitmalik832/common-js-utils-pkg/.*\\.svg$',
-            '@arpitmalik832/common-js-utils-pkg/.*\\.png$',
+            '@arpitmalik832/common-js-utils/.*\\.css$',
+            '@arpitmalik832/common-js-utils/.*\\.svg$',
+            '@arpitmalik832/common-js-utils/.*\\.png$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],
@@ -242,7 +243,7 @@ export default [
     ...mdxPlugin.flatCodeBlocks,
     files: mdFiles,
     languageOptions: {
-      parser: mdxParser,
+      parser: eslintMdx,
       parserOptions: {
         extensions: [...mdFiles, ...jsFiles, ...storiesFiles],
         markdownExtensions: [...mdFiles, ...jsFiles, ...storiesFiles],

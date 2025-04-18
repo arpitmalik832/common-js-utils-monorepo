@@ -3,7 +3,7 @@
  * @file This file is saved as `pageSlice.js`.
  */
 import { createSlice } from '@reduxjs/toolkit';
-import { errorLog } from '../../utils/logsUtils';
+import { log } from '../../utils/logsUtils';
 import { SLICE_NAMES } from '../../enums/redux';
 
 const pageSlice = createSlice({
@@ -11,7 +11,7 @@ const pageSlice = createSlice({
   initialState: [],
   reducers: {
     push: (state, action) => {
-      if (!action.payload || typeof action.payload !== 'function') {
+      if (!action.payload || typeof action.payload !== 'string') {
         return state;
       }
       state.push(action.payload);
@@ -19,17 +19,11 @@ const pageSlice = createSlice({
     },
     pop: state => {
       const top = state.pop();
-      if (top && typeof top === 'function') {
-        try {
-          top();
-        } catch (error) {
-          errorLog('Error executing callback:', error);
-        }
-      }
+      log('Popped page:', top);
       return state;
     },
     replace: (state, action) => {
-      if (!action.payload || typeof action.payload !== 'function') {
+      if (!action.payload || typeof action.payload !== 'string') {
         return state;
       }
       const newState = [...state];

@@ -142,3 +142,7 @@ yarn-error.log*
 
 .nx
 .nx-cache
+
+# adding temporarily
+.logs
+distInfo
