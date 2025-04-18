@@ -173,7 +173,7 @@
     "eslint-plugin-storybook": "^0.11.3",
     "express": "^4.21.2",
     "express-static-gzip": "^2.2.0",
-    "flow-bin": "^0.261.2",
+    "flow-bin": "^0.268.0",
     "globals": "^16.0.0",
     "hermes-eslint": "^0.26.0",
     "husky": "^9.1.7",
