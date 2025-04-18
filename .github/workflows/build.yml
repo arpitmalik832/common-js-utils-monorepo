@@ -6,20 +6,20 @@ on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: "Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)"
+        description: 'Package (packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)'
         required: true
-        default: "packages/common-js-utils"
-        type: "choice"
+        default: 'packages/common-js-utils'
+        type: 'choice'
         options:
           - packages/common-js-utils
           - packages/common-js-utils-flow
           - test-apps/common-js-utils
           - test-apps/common-js-utils-flow
       build_type:
-        description: "Build type (prod, beta, stage)"
+        description: 'Build type (prod, beta, stage)'
         required: true
-        default: "stage"
-        type: "choice"
+        default: 'stage'
+        type: 'choice'
         options:
           - prod
           - beta
@@ -45,7 +45,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -56,15 +56,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          # Add token to global .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
       - name: Building the project

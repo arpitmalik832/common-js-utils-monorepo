@@ -9,7 +9,7 @@ import {
   APP_ENUMS,
   slices,
   preferredColorScheme,
-} from '@arpitmalik832/common-js-utils-pkg';
+} from '@arpitmalik832/common-js-utils';
 
 /**
  * Custom hook to manage the application's theme.

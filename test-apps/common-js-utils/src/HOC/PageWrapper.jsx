@@ -4,7 +4,7 @@
  */
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { log } from '@arpitmalik832/common-js-utils-pkg';
+import { log } from '@arpitmalik832/common-js-utils';
 
 /**
  * PageWrapper component that logs route changes and renders child components.

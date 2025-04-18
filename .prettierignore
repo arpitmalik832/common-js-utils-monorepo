@@ -1,0 +1,25 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+node_modules
+packages/*/node_modules
+packages/*/build
+packages/*/dist
+packages/*/distInfo
+packages/*/types
+packages/*/coverage
+packages/*/storybook-static
+packages/*/static/styles
+packages/*/flow-typed/npm
+packages/*/.logs
+test-apps/*/node_modules
+test-apps/*/build
+test-apps/*/dist
+test-apps/*/distInfo
+test-apps/*/types
+test-apps/*/coverage
+test-apps/*/storybook-static
+test-apps/*/static/styles
+test-apps/*/flow-typed/npm
+test-apps/*/.logs
+**/*.md

@@ -2,7 +2,7 @@
  * This file is used to export the store based on the environment.
  * @file This file is saved as `redux/store.js`.
  */
-import { APP_ENUMS } from '@arpitmalik832/common-js-utils-pkg';
+import { APP_ENUMS } from '@arpitmalik832/common-js-utils';
 
 import devStore from './dev';
 import prodStore from './prod';

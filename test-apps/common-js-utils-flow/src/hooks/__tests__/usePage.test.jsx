@@ -5,7 +5,7 @@
 import { renderHook, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as reactRedux from 'react-redux';
-import { slices } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { slices } from '@arpitmalik832/common-js-utils-flow';
 
 import usePage from '../usePage';
 
@@ -29,8 +29,8 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-flow-pkg', () => ({
-  ...jest.requireActual('@arpitmalik832/common-js-utils-flow-pkg'),
+jest.mock('@arpitmalik832/common-js-utils-flow', () => ({
+  ...jest.requireActual('@arpitmalik832/common-js-utils-flow'),
   log: jest.fn(),
   errorLog: jest.fn(),
   beforeUnload: {

@@ -9,6 +9,7 @@ echo "\n${Blue}=================================${NC}\n"
 
 echo "${Green}Start - Linting of the code.${NC}"
 
+pnpm build:build-modules:prod
 pnpm build:pkg:prod
 
 pnpm lint:fix

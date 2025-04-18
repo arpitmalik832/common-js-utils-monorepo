@@ -7,7 +7,7 @@ import {
   beforeUnload,
   errorLog,
   log,
-} from '@arpitmalik832/common-js-utils-flow-pkg';
+} from '@arpitmalik832/common-js-utils-flow';
 
 import { BACK_CLICK, APP_UNMOUNT } from '../enums/app';
 

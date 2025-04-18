@@ -10,7 +10,7 @@ import {
   beforeUnload,
   errorLog,
   log,
-} from '@arpitmalik832/common-js-utils-pkg';
+} from '@arpitmalik832/common-js-utils';
 
 import { BACK_CLICK, APP_UNMOUNT } from '../enums/app';
 

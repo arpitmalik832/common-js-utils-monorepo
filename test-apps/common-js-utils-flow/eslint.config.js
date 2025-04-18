@@ -2,8 +2,8 @@
  * ESLint configuration for the library.
  * @file This file is saved as `eslint.config.js`.
  */
-import mdxParser from 'eslint-mdx';
 import globals from 'globals';
+import * as eslintMdx from 'eslint-mdx';
 import * as mdxPlugin from 'eslint-plugin-mdx';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -44,6 +44,7 @@ export default [
       '**/*.md',
       'distInfo/*',
       'flow-typed/npm/*',
+      '.logs/*',
     ],
   },
   {
@@ -138,9 +139,9 @@ export default [
         {
           ignore: [
             'typescript-eslint',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.css$',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.svg$',
-            '@arpitmalik832/common-js-utils-flow-pkg/.*\\.png$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.css$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.svg$',
+            '@arpitmalik832/common-js-utils-flow/.*\\.png$',
             'react-dom/client',
             'eslint-plugin-cypress/flat',
           ],
@@ -186,7 +187,7 @@ export default [
     ...mdxPlugin.flatCodeBlocks,
     files: mdFiles,
     languageOptions: {
-      parser: mdxParser,
+      parser: eslintMdx,
       parserOptions: {
         extensions: [...mdFiles, ...jsFiles, ...storiesFiles],
         markdownExtensions: [...mdFiles, ...jsFiles, ...storiesFiles],

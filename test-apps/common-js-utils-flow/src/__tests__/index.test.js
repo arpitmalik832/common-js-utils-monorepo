@@ -9,7 +9,7 @@ const mockReportWebVitals = jest.fn();
 const mockMount = jest.fn();
 
 // Mock the library
-jest.mock('@arpitmalik832/common-js-utils-flow-pkg', () => ({
+jest.mock('@arpitmalik832/common-js-utils-flow', () => ({
   errorLog: mockErrorLog,
   SWRegistration: {
     register: mockRegister,

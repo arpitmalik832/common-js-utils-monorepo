@@ -8,8 +8,23 @@ import path from 'path';
 import chalk from 'chalk';
 import { fileURLToPath } from 'url';
 
-const filename = fileURLToPath(import.meta.url);
-const dirName = path.dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  const filename = fileURLToPath(import.meta.url);
+  return path.dirname(filename);
+}
+
+const dirname = getConfigDir();
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -17,7 +32,7 @@ const app = express();
 app.use(express.static('storybook-static'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(dirName, '../storybook-static/index.html'));
+  res.sendFile(path.join(dirname, '../storybook-static/index.html'));
 });
 
 app.listen(port, err => {

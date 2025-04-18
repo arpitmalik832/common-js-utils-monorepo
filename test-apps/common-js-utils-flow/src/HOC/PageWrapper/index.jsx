@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { log } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { log } from '@arpitmalik832/common-js-utils-flow';
 
 function PageWrapper(): React.Node {
   const location = useLocation();
