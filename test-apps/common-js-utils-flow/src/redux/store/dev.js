@@ -1,6 +1,5 @@
 // @flow
 import { AxiosInstance } from 'axios';
-import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
 import { slices } from '@arpitmalik832/common-js-utils-flow';
 import { configureStore } from '@reduxjs/toolkit';
@@ -44,7 +43,7 @@ const store: {
         ],
         ignoredPaths: ['apis', 'sampleQuery', 'navigation'],
       },
-    }).concat(sampleQuery.middleware, thunk, logger),
+    }).concat(sampleQuery.middleware, logger),
 });
 
 export default store;
