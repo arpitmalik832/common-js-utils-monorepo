@@ -59,6 +59,13 @@ jest.mock('../../webpack/minimizer.js', () => ({
   })),
 }));
 
+jest.mock('../../webpack/workers.js', () => ({
+  __esModule: true,
+  default: jest.fn(env => ({
+    plugins: [{ name: 'InjectManifest', env }],
+  })),
+}));
+
 jest.mock('../../../utils/fileUtils.js', () => ({
   getDirname: jest.fn(() => '/mock/path'),
 }));

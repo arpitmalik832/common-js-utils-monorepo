@@ -2,7 +2,6 @@
  * This file is used to create the redux store for development environment.
  * @file This file is saved as `redux/store/store.dev.js`.
  */
-import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
 import { slices } from '@arpitmalik832/common-js-utils';
 import { configureStore } from '@reduxjs/toolkit';
@@ -31,7 +30,7 @@ const store = configureStore({
         ],
         ignoredPaths: ['apis', 'sampleQuery', 'navigation', 'page'],
       },
-    }).concat(sampleQuery.middleware, thunk, logger),
+    }).concat(sampleQuery.middleware, logger),
 });
 
 export default store;

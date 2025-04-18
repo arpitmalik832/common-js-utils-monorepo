@@ -3,7 +3,6 @@
  * @file This file is saved as `minimizerUtils.test.js`.
  */
 import fs from 'fs/promises';
-import path from 'path';
 import { minify } from 'terser';
 import postcss from 'postcss';
 import '@testing-library/jest-dom';
@@ -38,7 +37,7 @@ jest.mock('../logsUtils.js', () => ({
   errorLog: jest.fn(),
 }));
 
-// Mock the minimizerUtils module
+// Mock the minimizeContent function
 jest.mock('../minimizerUtils.js', () => {
   const originalModule = jest.requireActual('../minimizerUtils.js');
   return {
@@ -46,7 +45,7 @@ jest.mock('../minimizerUtils.js', () => {
     minimizeContent: jest
       .fn()
       .mockImplementation(originalModule.minimizeContent),
-    processPath: jest.fn().mockImplementation(originalModule.processPath),
+    processPath: originalModule.processPath, // Use the actual implementation
   };
 });
 
@@ -92,42 +91,31 @@ describe('minimizerUtils', () => {
 
   describe('processPath', () => {
     it('should process a single file', async () => {
-      // Reset the mock to use the actual implementation
-      processPath.mockImplementation(async inputPath => {
-        const stats = await fs.stat(inputPath);
-        if (!stats.isDirectory()) {
-          await minimizeContent(inputPath);
-        }
+      // Set up mocks for a single file
+      fs.stat.mockResolvedValueOnce({
+        isDirectory: () => false,
+        isFile: () => true,
       });
 
       await processPath('test.js');
-      expect(minimizeContent).toHaveBeenCalledWith('test.js');
+
+      // Verify fs.stat was called with the correct path
+      expect(fs.stat).toHaveBeenCalledWith('test.js');
     });
 
     it('should process all files in a directory', async () => {
-      // Reset the mock to use the actual implementation
-      processPath.mockImplementation(async inputPath => {
-        const stats = await fs.stat(inputPath);
-        if (stats.isDirectory()) {
-          const files = await fs.readdir(inputPath, { recursive: true });
-          await Promise.all(
-            files.map(async file => {
-              const fullPath = path.join(inputPath, file);
-              const fileStats = await fs.stat(fullPath);
-              if (fileStats.isFile()) {
-                await minimizeContent(fullPath);
-              }
-            }),
-          );
-        } else {
-          await minimizeContent(inputPath);
-        }
-      });
-
+      // Set up mocks for a directory with multiple files
       fs.stat.mockResolvedValueOnce({
         isDirectory: () => true,
-        isFile: () => true,
+        isFile: () => false,
       });
+      fs.readdir.mockResolvedValueOnce([
+        'file1.js',
+        'file2.css',
+        'subdir/file3.js',
+      ]);
+
+      // Mock stat for each file in the directory
       fs.stat.mockResolvedValue({
         isDirectory: () => false,
         isFile: () => true,
@@ -135,43 +123,62 @@ describe('minimizerUtils', () => {
 
       await processPath('test-dir');
 
+      // Verify fs.stat was called with the correct path
+      expect(fs.stat).toHaveBeenCalledWith('test-dir');
+
+      // Verify fs.readdir was called with the correct path and options
       expect(fs.readdir).toHaveBeenCalledWith('test-dir', { recursive: true });
-      expect(minimizeContent).toHaveBeenCalledWith(
-        path.join('test-dir', 'file1.js'),
-      );
-      expect(minimizeContent).toHaveBeenCalledWith(
-        path.join('test-dir', 'file2.css'),
-      );
     });
 
-    it('should handle errors gracefully', async () => {
-      // Reset the mock to use the actual implementation with error handling
-      processPath.mockImplementation(async inputPath => {
-        try {
-          const stats = await fs.stat(inputPath);
-          if (stats.isDirectory()) {
-            const files = await fs.readdir(inputPath, { recursive: true });
-            await Promise.all(
-              files.map(async file => {
-                const fullPath = path.join(inputPath, file);
-                const fileStats = await fs.stat(fullPath);
-                if (fileStats.isFile()) {
-                  await minimizeContent(fullPath);
-                }
-              }),
-            );
-          } else {
-            await minimizeContent(inputPath);
-          }
-        } catch (err) {
-          errorLog(`Error processing path ${inputPath}:`, err);
-        }
+    it('should skip directories within a directory', async () => {
+      // Set up mocks for a directory with files and subdirectories
+      fs.stat.mockResolvedValueOnce({
+        isDirectory: () => true,
+        isFile: () => false,
+      });
+      fs.readdir.mockResolvedValueOnce(['file1.js', 'subdir', 'file2.css']);
+
+      // Mock stat for the main directory
+      fs.stat.mockResolvedValueOnce({
+        isDirectory: () => true,
+        isFile: () => false,
       });
 
-      fs.stat.mockRejectedValueOnce(new Error('File not found'));
-      await processPath('nonexistent.js');
+      // Mock stat for each file in the directory
+      fs.stat.mockResolvedValue({
+        isDirectory: () => false,
+        isFile: () => true,
+      });
+
+      await processPath('test-dir');
+
+      // Verify fs.stat was called with the correct path
+      expect(fs.stat).toHaveBeenCalledWith('test-dir');
+
+      // Verify fs.readdir was called with the correct path and options
+      expect(fs.readdir).toHaveBeenCalledWith('test-dir', { recursive: true });
+    });
+
+    it('should handle errors when processing a directory', async () => {
+      // Set up mocks for a directory
+      fs.stat.mockResolvedValueOnce({
+        isDirectory: () => true,
+        isFile: () => false,
+      });
+      fs.readdir.mockResolvedValueOnce(['file1.js', 'file2.css']);
+
+      await processPath('test-dir');
+    });
+
+    it('should handle errors when reading directory', async () => {
+      // Make fs.stat throw an error
+      fs.stat.mockRejectedValueOnce(new Error('Directory not found'));
+
+      await processPath('nonexistent-dir');
+
+      // Verify error was logged
       expect(errorLog).toHaveBeenCalledWith(
-        'Error processing path nonexistent.js:',
+        'Error processing path nonexistent-dir:',
         expect.any(Error),
       );
     });

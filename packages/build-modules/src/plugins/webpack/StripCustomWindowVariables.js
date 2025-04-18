@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /**
  * Strip Custom Window Variables Plugin.
- * @file The file is saved as `build_utils/webpack/customPlugins/StripCustomWindowVariables.mjs`.
+ * @file The file is saved as `StripCustomWindowVariables.js`.
  */
 import webpack from 'webpack';
 
@@ -43,4 +43,4 @@ class StripCustomWindowVariablesPlugin {
   }
 }
 
-export { StripCustomWindowVariablesPlugin };
+export default StripCustomWindowVariablesPlugin;

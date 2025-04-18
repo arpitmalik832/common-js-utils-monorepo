@@ -5,3 +5,4 @@
 export * from './fileUtils.js';
 export * from './logsUtils.js';
 export * from './minimizerUtils.js';
+export * from './federationUtils.js';

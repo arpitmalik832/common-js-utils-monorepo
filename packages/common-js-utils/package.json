@@ -192,7 +192,7 @@
     "prettier": "^3.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "release-it": "^18.1.2",
+    "release-it": "^19.0.1",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
     "rxjs": "^7.8.2",
