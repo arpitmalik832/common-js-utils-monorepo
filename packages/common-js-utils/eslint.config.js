@@ -3,9 +3,9 @@
  * @file This file is saved as `eslint.config.js`.
  */
 import babelParser from '@babel/eslint-parser';
-import mdxParser from 'eslint-mdx';
 import globals from 'globals';
 import * as mdxPlugin from 'eslint-plugin-mdx';
+import * as eslintMdx from 'eslint-mdx';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import js from '@eslint/js';
@@ -230,7 +230,7 @@ export default [
     ...mdxPlugin.flatCodeBlocks,
     files: mdFiles,
     languageOptions: {
-      parser: mdxParser,
+      parser: eslintMdx,
       parserOptions: {
         extensions: [...mdFiles, ...jsFiles, ...storiesFiles],
         markdownExtensions: [...mdFiles, ...jsFiles, ...storiesFiles],

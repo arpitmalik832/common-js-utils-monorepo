@@ -2,8 +2,8 @@
  * Rollup configuration file for the library package.
  * @file This file is saved as `rollup.config.js`.
  */
-import mainConfig from './build_utils/rollup/configFiles/rollup.main.mjs';
+import getMainConfig from './build_utils/rollup/configs/main.js';
 
-const config = [mainConfig()];
+const config = [getMainConfig()];
 
 export default config;

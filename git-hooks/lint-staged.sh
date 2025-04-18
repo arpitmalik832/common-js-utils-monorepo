@@ -9,6 +9,7 @@ echo "\n${Blue}=================================${NC}\n"
 
 echo "${Green}Start - lint-staged of the code.${NC}"
 
+pnpm build:build-modules:prod
 pnpm build:pkg:prod
 
 pnpm lint-staged

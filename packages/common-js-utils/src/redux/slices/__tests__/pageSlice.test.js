@@ -3,106 +3,164 @@
  * @file This file is saved as `pageSlice.test.js`.
  */
 import { pageSlice, pageSliceActions } from '../pageSlice';
+import { log } from '../../../utils/logsUtils';
 
 jest.mock('../../../utils/logsUtils', () => ({
-  errorLog: jest.fn(),
+  log: jest.fn(),
 }));
 
 describe('pageSlice reducers', () => {
   let initialState;
-  let mockCallback;
 
   beforeEach(() => {
-    mockCallback = jest.fn();
     initialState = [];
+    jest.clearAllMocks();
   });
 
   it('should handle initial state', () => {
     expect(pageSlice.reducer(undefined, { type: 'unknown' })).toEqual([]);
   });
 
-  describe('pushStack', () => {
-    it('should add callback to empty stack', () => {
+  describe('push', () => {
+    it('should add page path to empty stack', () => {
+      const pagePath = '/home';
       const actual = pageSlice.reducer(
         initialState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(pagePath),
       );
       expect(actual).toHaveLength(1);
-      expect(actual[0]).toBe(mockCallback);
+      expect(actual[0]).toBe(pagePath);
     });
 
-    it('should add multiple callbacks to stack', () => {
-      const mockCallback2 = jest.fn();
+    it('should add multiple page paths to stack', () => {
+      const pagePath1 = '/home';
+      const pagePath2 = '/about';
       let state = pageSlice.reducer(
         initialState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(pagePath1),
       );
-      state = pageSlice.reducer(state, pageSliceActions.push(mockCallback2));
+      state = pageSlice.reducer(state, pageSliceActions.push(pagePath2));
 
       expect(state).toHaveLength(2);
-      expect(state[0]).toBe(mockCallback);
-      expect(state[1]).toBe(mockCallback2);
+      expect(state[0]).toBe(pagePath1);
+      expect(state[1]).toBe(pagePath2);
     });
 
-    it('should preserve existing callbacks when pushing new one', () => {
-      const existingState = [jest.fn()];
+    it('should preserve existing paths when pushing new one', () => {
+      const existingState = ['/home'];
+      const newPath = '/about';
       const actual = pageSlice.reducer(
         existingState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(newPath),
       );
       expect(actual).toHaveLength(2);
-      expect(actual[1]).toBe(mockCallback);
+      expect(actual[1]).toBe(newPath);
+    });
+
+    it('should not add invalid page paths', () => {
+      const invalidPaths = [undefined, null, 123, {}];
+      invalidPaths.forEach(invalidPath => {
+        const actual = pageSlice.reducer(
+          initialState,
+          pageSliceActions.push(invalidPath),
+        );
+        expect(actual).toEqual(initialState);
+      });
     });
   });
 
-  describe('popStack', () => {
-    it('should execute and remove last callback from stack', () => {
-      // Setup initial state with a callback
+  describe('pop', () => {
+    it('should remove last page path from stack', () => {
+      const pagePath = '/home';
       const state = pageSlice.reducer(
         initialState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(pagePath),
       );
 
-      // Pop the callback
       const actual = pageSlice.reducer(state, pageSliceActions.pop());
 
       expect(actual).toHaveLength(0);
-      expect(mockCallback).toHaveBeenCalled();
+      expect(log).toHaveBeenCalledWith('Popped page:', pagePath);
     });
 
     it('should handle empty stack', () => {
       const actual = pageSlice.reducer(initialState, pageSliceActions.pop());
       expect(actual).toHaveLength(0);
+      expect(log).toHaveBeenCalledWith('Popped page:', undefined);
     });
 
     it('should handle multiple pops', () => {
-      const mockCallback2 = jest.fn();
+      const pagePath1 = '/home';
+      const pagePath2 = '/about';
       let state = pageSlice.reducer(
         initialState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(pagePath1),
       );
-      state = pageSlice.reducer(state, pageSliceActions.push(mockCallback2));
+      state = pageSlice.reducer(state, pageSliceActions.push(pagePath2));
 
-      // Pop first callback
+      // Pop first path
       state = pageSlice.reducer(state, pageSliceActions.pop());
       expect(state).toHaveLength(1);
-      expect(mockCallback2).toHaveBeenCalled();
+      expect(log).toHaveBeenCalledWith('Popped page:', pagePath2);
 
-      // Pop second callback
+      // Pop second path
       state = pageSlice.reducer(state, pageSliceActions.pop());
       expect(state).toHaveLength(0);
-      expect(mockCallback).toHaveBeenCalled();
+      expect(log).toHaveBeenCalledWith('Popped page:', pagePath1);
     });
   });
 
-  describe('clearStack', () => {
-    it('should clear all callbacks from stack', () => {
-      // Setup initial state with multiple callbacks
+  describe('replace', () => {
+    it('should replace page path at top of non-empty stack', () => {
+      const oldPath = '/home';
+      const newPath = '/about';
       let state = pageSlice.reducer(
         initialState,
-        pageSliceActions.push(mockCallback),
+        pageSliceActions.push(oldPath),
       );
-      state = pageSlice.reducer(state, pageSliceActions.push(jest.fn()));
+
+      state = pageSlice.reducer(state, pageSliceActions.replace(newPath));
+
+      expect(state).toHaveLength(1);
+      expect(state[0]).toBe(newPath);
+    });
+
+    it('should add page path to empty stack', () => {
+      const pagePath = '/home';
+      const actual = pageSlice.reducer(
+        initialState,
+        pageSliceActions.replace(pagePath),
+      );
+
+      expect(actual).toHaveLength(1);
+      expect(actual[0]).toBe(pagePath);
+    });
+
+    it('should not replace with invalid page paths', () => {
+      const oldPath = '/home';
+      const invalidPaths = [undefined, null, 123, {}];
+      const state = pageSlice.reducer(
+        initialState,
+        pageSliceActions.push(oldPath),
+      );
+
+      invalidPaths.forEach(invalidPath => {
+        const actual = pageSlice.reducer(
+          state,
+          pageSliceActions.replace(invalidPath),
+        );
+        expect(actual).toEqual(state);
+      });
+    });
+  });
+
+  describe('clear', () => {
+    it('should clear all page paths from stack', () => {
+      let state = pageSlice.reducer(
+        initialState,
+        pageSliceActions.push('/home'),
+      );
+      state = pageSlice.reducer(state, pageSliceActions.push('/about'));
 
       const actual = pageSlice.reducer(state, pageSliceActions.clear());
       expect(actual).toHaveLength(0);
@@ -112,162 +170,67 @@ describe('pageSlice reducers', () => {
       const actual = pageSlice.reducer(initialState, pageSliceActions.clear());
       expect(actual).toHaveLength(0);
     });
-
-    it('should not execute callbacks when clearing', () => {
-      // Setup initial state with a callback
-      const state = pageSlice.reducer(
-        initialState,
-        pageSliceActions.push(mockCallback),
-      );
-
-      // Clear the stack
-      pageSlice.reducer(state, pageSliceActions.clear());
-      expect(mockCallback).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('error cases', () => {
-    it('should handle non-function callbacks in pushStack', () => {
-      const invalidCallback = 'not a function';
-      const actual = pageSlice.reducer(
-        initialState,
-        pageSliceActions.push(invalidCallback),
-      );
-      expect(actual.length).toBe(0);
-    });
-
-    it('should handle undefined callback in pushStack', () => {
-      const actual = pageSlice.reducer(
-        initialState,
-        pageSliceActions.push(undefined),
-      );
-      expect(actual.length).toBe(0);
-    });
-
-    it('should handle error in callback execution', () => {
-      const errorCallback = jest.fn(() => {
-        throw new Error('Callback error');
-      });
-
-      // Setup state with error callback
-      const state = pageSlice.reducer(
-        initialState,
-        pageSliceActions.push(errorCallback),
-      );
-
-      // Pop should not throw
-      expect(() => {
-        pageSlice.reducer(state, pageSliceActions.pop());
-      }).not.toThrow();
-    });
-  });
-
-  describe('state immutability', () => {
-    it('should not mutate original state on pushStack', () => {
-      const originalState = [...initialState];
-      pageSlice.reducer(initialState, pageSliceActions.push(mockCallback));
-      expect(initialState).toEqual(originalState);
-    });
-
-    it('should not mutate original state on popStack', () => {
-      const state = [mockCallback];
-      const originalState = [...state];
-
-      pageSlice.reducer(state, pageSliceActions.pop());
-      expect(state).toEqual(originalState);
-    });
-
-    it('should not mutate original state on clearStack', () => {
-      const state = [mockCallback];
-      const originalState = [...state];
-
-      pageSlice.reducer(state, pageSliceActions.clear());
-      expect(state).toEqual(originalState);
-    });
   });
 
   describe('action creators', () => {
-    it('should create pushStack action', () => {
-      expect(pageSliceActions.push(mockCallback)).toEqual({
+    it('should create push action', () => {
+      const pagePath = '/home';
+      expect(pageSliceActions.push(pagePath)).toEqual({
         type: 'page/push',
-        payload: mockCallback,
+        payload: pagePath,
       });
     });
 
-    it('should create popStack action', () => {
+    it('should create pop action', () => {
       expect(pageSliceActions.pop()).toEqual({
         type: 'page/pop',
       });
     });
 
-    it('should create clearStack action', () => {
+    it('should create replace action', () => {
+      const pagePath = '/home';
+      expect(pageSliceActions.replace(pagePath)).toEqual({
+        type: 'page/replace',
+        payload: pagePath,
+      });
+    });
+
+    it('should create clear action', () => {
       expect(pageSliceActions.clear()).toEqual({
         type: 'page/clear',
       });
     });
   });
 
-  describe('replaceStack', () => {
-    it('should replace callback at top of non-empty stack', () => {
-      const newCallback = jest.fn();
-      let state = pageSlice.reducer(
-        initialState,
-        pageSliceActions.push(mockCallback),
-      );
-
-      state = pageSlice.reducer(state, pageSliceActions.replace(newCallback));
-
-      expect(state).toHaveLength(1);
-      expect(state[0]).toBe(newCallback);
+  describe('state immutability', () => {
+    it('should not mutate original state on push', () => {
+      const originalState = [...initialState];
+      pageSlice.reducer(initialState, pageSliceActions.push('/home'));
+      expect(initialState).toEqual(originalState);
     });
 
-    it('should add callback to empty stack', () => {
-      const actual = pageSlice.reducer(
-        initialState,
-        pageSliceActions.replace(mockCallback),
-      );
-
-      expect(actual).toHaveLength(1);
-      expect(actual[0]).toBe(mockCallback);
-    });
-
-    it('should handle non-function callbacks', () => {
-      const invalidCallback = 'not a function';
-      const state = [mockCallback];
-
-      const actual = pageSlice.reducer(
-        state,
-        pageSliceActions.replace(invalidCallback),
-      );
-
-      expect(actual).toEqual(state);
-    });
-
-    it('should handle undefined callback', () => {
-      const state = [mockCallback];
-
-      const actual = pageSlice.reducer(
-        state,
-        pageSliceActions.replace(undefined),
-      );
-
-      expect(actual).toEqual(state);
-    });
-
-    it('should preserve state immutability', () => {
-      const state = [mockCallback];
+    it('should not mutate original state on pop', () => {
+      const state = ['/home'];
       const originalState = [...state];
 
-      pageSlice.reducer(state, pageSliceActions.replace(jest.fn()));
-
+      pageSlice.reducer(state, pageSliceActions.pop());
       expect(state).toEqual(originalState);
     });
 
-    it('should create replaceStack action', () => {
-      expect(pageSliceActions.replace(mockCallback)).toEqual({
-        type: 'page/replace',
-        payload: mockCallback,
-      });
+    it('should not mutate original state on replace', () => {
+      const state = ['/home'];
+      const originalState = [...state];
+
+      pageSlice.reducer(state, pageSliceActions.replace('/about'));
+      expect(state).toEqual(originalState);
+    });
+
+    it('should not mutate original state on clear', () => {
+      const state = ['/home'];
+      const originalState = [...state];
+
+      pageSlice.reducer(state, pageSliceActions.clear());
+      expect(state).toEqual(originalState);
     });
   });
 });

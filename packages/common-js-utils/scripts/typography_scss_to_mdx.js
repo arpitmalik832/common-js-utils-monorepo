@@ -7,15 +7,30 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const filename = fileURLToPath(import.meta.url);
-const dirName = path.dirname(filename);
+/**
+ * Get the config directory.
+ * @returns {string} The config directory.
+ * @example
+ * const dirname = getConfigDir();
+ */
+function getConfigDir() {
+  if (typeof __dirname !== 'undefined') {
+    // CommonJS environment
+    return __dirname;
+  }
+  // ESM environment
+  const filename = fileURLToPath(import.meta.url);
+  return path.dirname(filename);
+}
+
+const dirname = getConfigDir();
 
 // Paths to the source SCSS file and target MDX file
 const scssFilePath = path.join(
-  dirName,
+  dirname,
   '../static/styles/style-dictionary/typography.scss',
 );
-const mdxFilePath = path.join(dirName, '../src/stories/Typography/index.mdx');
+const mdxFilePath = path.join(dirname, '../src/stories/Typography/index.mdx');
 
 // Read the SCSS file
 const scssContent = fs.readFileSync(scssFilePath, 'utf8');

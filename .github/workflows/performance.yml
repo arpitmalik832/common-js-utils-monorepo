@@ -44,15 +44,15 @@ jobs:
             ${{ runner.os }}-nx-
       - name: Authenticating with GitHub Packages
         run: |
-          # First find and update all .npmrc files recursively
-          find . -type f -name ".npmrc" -exec sh -c '
-            echo "Processing: {}"
-            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" {}
-            cat {}
-          ' \;
-          # Add token to global .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-          echo "Added token to global .npmrc"
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
       - name: Setup temporary files
         run: |
           echo "BASE_JSON=$(mktemp)" >> $GITHUB_ENV
@@ -79,7 +79,7 @@ jobs:
       - name: Collect results
         id: collect
         run: |
-          pnpx nx run @arpitmalik832/build-modules:size-compare -- ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} ${{ env.OUTPUT_PATH}}
+          pnpx nx run @arpitmalik832/build-modules:size-compare -- -b ${{ env.BASE_JSON }} -p ${{ env.PATCH_JSON }} -o ${{ env.OUTPUT_PATH}}
 
           # Escape the content to avoid delimiter issues
           ESCAPED_CONTENT=$(cat ${{ env.OUTPUT_PATH }} | sed 's/%/%25/g' | sed 's/\r/%0D/g' | sed 's/\n/%0A/g')

@@ -2,7 +2,6 @@
  * Test cases for the development redux store.
  * @file This file is saved as `redux/store/dev.test.js`.
  */
-import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
 import { slices } from '@arpitmalik832/common-js-utils';
 import { sampleQuery } from '../../queries/sampleQuery';
@@ -73,7 +72,6 @@ describe('Redux Store (Development)', () => {
     expect(result).toEqual([
       'defaultMiddleware',
       sampleQuery.middleware,
-      thunk,
       logger,
     ]);
   });

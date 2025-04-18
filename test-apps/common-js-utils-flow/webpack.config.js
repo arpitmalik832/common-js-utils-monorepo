@@ -2,38 +2,58 @@
  * Webpack configuration file.
  * @file This file is saved as `webpack.config.js`.
  */
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 import { merge } from 'webpack-merge';
-
-import commonConfig from './build_utils/webpack/configs/webpack.common.mjs';
-import devConfig from './build_utils/webpack/configs/webpack.dev.mjs';
-import prodConfig from './build_utils/webpack/configs/webpack.prod.mjs';
-import federationConfig from './build_utils/webpack/configs/webpack.federation.mjs';
-import bundleAnalyzerConfig from './build_utils/webpack/configs/webpack.bundleanalyzer.mjs';
-import buildStatsConfig from './build_utils/webpack/configs/webpack.buildstats.mjs';
-import workersConfig from './build_utils/webpack/configs/webpack.workers.mjs';
-
-import { ENVS } from './build_utils/config/index.mjs';
+import { webpackConfigs, MAIN_ENUMS } from '@arpitmalik832/build-modules';
 import {
   ERR_NO_APP_ENV_FLAG,
   ERR_NO_BE_ENV_FLAG,
 } from './build_utils/config/logs.mjs';
 
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
+
 /**
  * Adds additional configurations based on command line arguments.
+ * @param {string} projectRoot - The project root directory.
  * @returns {Array} An array of additional webpack configurations.
  * @example
  * // To include federation and bundle analyzer configurations
  * // Run the command with federation bundleAnalyzer
  */
-function addons() {
+function addons(projectRoot) {
   const addFederation = process.env.INCLUDE_FEDERATION === 'true';
   const addVisualizer = process.env.INCLUDE_VISUALIZER === 'true';
   const addBuildStats = process.env.INCLUDE_BUILD_STATS === 'true';
 
   const configs = [];
-  if (addFederation) configs.push(federationConfig);
-  if (addVisualizer) configs.push(bundleAnalyzerConfig);
-  if (addBuildStats) configs.push(buildStatsConfig);
+  if (addFederation)
+    configs.push(
+      webpackConfigs.getFederationConfig(
+        projectRoot,
+        process.env.APP_ENV,
+        pkg.dependencies,
+        [],
+      ),
+    );
+  if (addVisualizer)
+    configs.push(
+      webpackConfigs.getBundleAnalyzerConfig(
+        projectRoot,
+        'main',
+        process.env.APP_ENV,
+      ),
+    );
+  if (addBuildStats)
+    configs.push(
+      webpackConfigs.getBuildStatsConfig(
+        projectRoot,
+        'main',
+        process.env.APP_ENV,
+      ),
+    );
   return configs;
 }
 
@@ -54,20 +74,41 @@ function getConfig() {
     throw new Error(ERR_NO_BE_ENV_FLAG);
   }
 
+  const projectRoot = path.resolve();
+  const filename = fileURLToPath(import.meta.url);
+
   let envConfig;
 
   switch (process.env.APP_ENV) {
-    case ENVS.PROD:
-    case ENVS.BETA:
-    case ENVS.STG:
-      envConfig = prodConfig;
+    case MAIN_ENUMS.ENVS.PROD:
+    case MAIN_ENUMS.ENVS.BETA:
+    case MAIN_ENUMS.ENVS.STG:
+      envConfig = webpackConfigs.getProdConfig(
+        projectRoot,
+        process.env.APP_ENV,
+        ['abc'],
+      );
       break;
-    case ENVS.DEV:
+    case MAIN_ENUMS.ENVS.DEV:
     default:
-      envConfig = devConfig;
+      envConfig = webpackConfigs.getDevConfig(
+        projectRoot,
+        process.env.PORT || 3000,
+      );
   }
 
-  return merge(commonConfig, envConfig, workersConfig, ...addons());
+  return merge(
+    webpackConfigs.getCommonConfig(
+      projectRoot,
+      pkg,
+      process.env.APP_ENV,
+      'process.env.APP_ENV',
+      filename,
+    ),
+    envConfig,
+    webpackConfigs.getWorkersConfig(projectRoot),
+    ...addons(projectRoot),
+  );
 }
 
 export default getConfig;

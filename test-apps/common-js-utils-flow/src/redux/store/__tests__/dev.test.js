@@ -2,7 +2,6 @@
  * Test cases for the development redux store.
  * @file This file is saved as `redux/store/dev.test.js`.
  */
-import { thunk } from 'redux-thunk';
 import { logger } from 'redux-logger';
 import { slices } from '@arpitmalik832/common-js-utils-flow';
 import { sampleQuery } from '../../queries/sampleQuery';
@@ -19,10 +18,6 @@ jest.mock('@reduxjs/toolkit', () => ({
     reducer: jest.fn(),
     actions: {},
   })),
-}));
-
-jest.mock('redux-thunk', () => ({
-  thunk: jest.fn(),
 }));
 
 jest.mock('redux-logger', () => ({
@@ -73,7 +68,6 @@ describe('Redux Store (Development)', () => {
     expect(result).toEqual([
       'defaultMiddleware',
       sampleQuery.middleware,
-      thunk,
       logger,
     ]);
   });

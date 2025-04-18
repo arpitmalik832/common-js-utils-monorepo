@@ -2,8 +2,8 @@
  * ESLint configuration for the library.
  * @file This file is saved as `eslint.config.js`.
  */
-import mdxParser from 'eslint-mdx';
 import globals from 'globals';
+import * as eslintMdx from 'eslint-mdx';
 import * as mdxPlugin from 'eslint-plugin-mdx';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -187,7 +187,7 @@ export default [
     ...mdxPlugin.flatCodeBlocks,
     files: mdFiles,
     languageOptions: {
-      parser: mdxParser,
+      parser: eslintMdx,
       parserOptions: {
         extensions: [...mdFiles, ...jsFiles, ...storiesFiles],
         markdownExtensions: [...mdFiles, ...jsFiles, ...storiesFiles],

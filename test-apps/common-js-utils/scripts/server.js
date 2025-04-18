@@ -2,10 +2,11 @@
  * This script is used to serve the production build of the application.
  * @file The file is saved as `scripts/server.js`.
  */
+import path from 'path';
 import express from 'express';
 import expressStaticGzip from 'express-static-gzip';
+import { getPaths } from '@arpitmalik832/build-modules';
 
-import { outputPath } from '../build_utils/config/commonPaths.mjs';
 import { SERVER_STARTED_SUCCESSFULLY } from '../build_utils/config/logs.mjs';
 
 const app = express();
@@ -19,6 +20,8 @@ const port = 8080;
 //   res.header('Pragma', 'no-cache');
 //   res.sendFile(filePath);
 // }
+
+const { outputPath } = getPaths(path.resolve());
 
 app.set('ETag', 'strong');
 
