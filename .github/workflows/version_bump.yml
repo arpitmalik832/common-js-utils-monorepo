@@ -6,12 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: 'Package (/, packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)'
+        description: 'Package (/, packages/build-modules, packages/eslint-config, packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)'
         required: true
         default: 'packages/common-js-utils'
         type: 'choice'
         options:
           - /
+          - packages/build-modules
+          - packages/eslint-config
           - packages/common-js-utils
           - packages/common-js-utils-flow
           - test-apps/common-js-utils
