@@ -67,25 +67,8 @@ function getConfig() {
     projectRoot,
     process.env.LIB_ENV,
     [],
-    [
-      {
-        src: 'static/styles/*',
-        dest: 'dist/styles',
-      },
-      {
-        src: 'src/styles/mixins/*',
-        dest: 'dist/styles/mixins',
-      },
-      {
-        src: 'static/enums/icons_list.mjs',
-        dest: 'dist',
-      },
-      {
-        src: 'src/assets/*',
-        dest: 'dist/assets',
-      },
-    ],
-    ['dist/styles', 'dist/styles', 'dist/icons_list.mjs', 'dist/assets'],
+    [],
+    [],
   );
 
   return {
