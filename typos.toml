@@ -6,5 +6,6 @@ extend-exclude = [
     "**/coverage/**",
     "**/distInfo/**",
     "**/CHANGELOG.md",
-    "**/flow-typed/**"
+    "**/flow-typed/**",
+    "packages/eslint-config/build_utils/index.mjs"
 ]

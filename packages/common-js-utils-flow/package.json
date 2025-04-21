@@ -135,6 +135,7 @@
   },
   "devDependencies": {
     "@arpitmalik832/build-modules": "workspace:*",
+    "@arpitmalik832/eslint-config": "workspace:*",
     "@babel/core": "^7.26.9",
     "@babel/generator": "^7.26.9",
     "@babel/parser": "^7.26.9",
@@ -165,19 +166,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "eslint": "^9.21.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-mdx": "^3.3.1",
-    "eslint-plugin-css-modules": "^2.12.0",
-    "eslint-plugin-ft-flow": "^3.0.11",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.11.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-mdx": "^3.1.5",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-storybook": "^0.11.3",
     "express": "^4.21.2",
     "flow-bin": "^0.268.0",
     "glob": "^11.0.1",
@@ -226,5 +214,5 @@
     "rxjs": "^7.8.1",
     "web-vitals": "^4.2.4"
   },
-  "packageManager": "pnpm@10.5.0"
+  "packageManager": "pnpm@10.8.1"
 }
