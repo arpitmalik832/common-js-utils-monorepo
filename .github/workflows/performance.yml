@@ -1,0 +1,109 @@
+name: Performance
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+    branches:
+      - development
+      - staging
+      - beta
+      - release
+      - master
+      - 'feature-*'
+
+env:
+  PNPM_VERSION: 10.8.1
+  NODE_VERSION: 22
+  NX_CACHE_DIRECTORY: .nx-cache
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Installing pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Using Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - name: Nx cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NX_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nx-
+      - name: Authenticating with GitHub Packages
+        run: |
+          # Update only the root .npmrc file since packages use symbolic links
+          if [ -f ".npmrc" ]; then
+            echo "Updating root .npmrc file"
+            sed -i "s|//npm.pkg.github.com/:_authToken=\${GH_TOKEN}|//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}|g" .npmrc
+            cat .npmrc
+          else
+            echo "Root .npmrc file not found, creating it"
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          fi
+      - name: Setup temporary files
+        run: |
+          echo "BASE_JSON=$(mktemp)" >> $GITHUB_ENV
+          echo "PATCH_JSON=$(mktemp)" >> $GITHUB_ENV
+          echo "OUTPUT_PATH=$(mktemp)" >> $GITHUB_ENV
+      - name: Benchmark base
+        run: |
+          git checkout -f ${{ github.event.pull_request.base.sha }}
+          pnpm install --frozen-lockfile
+          pnpm build:prod
+          if pnpx nx run @arpitmalik832/build-modules:size -- -o ${{ env.BASE_JSON }}; then
+            echo "Ran successfully on base branch"
+          else
+            echo "{}" > ${{ env.BASE_JSON }}
+            echo "Benchmark script not found on base branch, using default values"
+          fi
+      - name: Benchmark patch
+        run: |
+          git checkout -f ${{ github.event.pull_request.head.sha }}
+          pnpm install --frozen-lockfile
+          pnpm build:prod
+          pnpx nx run @arpitmalik832/build-modules:size -- -o ${{ env.PATCH_JSON }}
+          echo "Ran successfully on patch branch"
+      - name: Collect results
+        id: collect
+        run: |
+          pnpx nx run @arpitmalik832/build-modules:size-compare -- -b ${{ env.BASE_JSON }} -p ${{ env.PATCH_JSON }} -o ${{ env.OUTPUT_PATH}}
+
+          # Escape the content to avoid delimiter issues
+          ESCAPED_CONTENT=$(cat ${{ env.OUTPUT_PATH }} | sed 's/%/%25/g' | sed 's/\r/%0D/g' | sed 's/\n/%0A/g')
+          echo "table<<EOF" >> $GITHUB_OUTPUT
+          echo "$ESCAPED_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Upload benchmark files
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-files-${{ github.run_id }}
+          path: |
+            ${{ env.BASE_JSON }}
+            ${{ env.PATCH_JSON }}
+            ${{ env.OUTPUT_PATH }}
+          retention-days: 7 # Keep artifacts for 7 days
+      - name: Post comment
+        uses: edumserrano/find-create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: '<!-- workflow-benchmarks-size-data -->'
+          comment-author: 'github-actions[bot]'
+          body: |
+            <!-- workflow-benchmarks-size-data -->
+            ### workflow: benchmarks/size
+            Comparison of actual, minified (terser) and compressed (brotli) size results, measured in bytes. Smaller is better.
+            ${{ steps.collect.outputs.table }}
+          edit-mode: replace
