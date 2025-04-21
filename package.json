@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arpitmalik832/common-js-utils-monorepo"
+    "url": "git+https://github.com/arpitmalik832/common-js-utils-monorepo.git"
   },
   "scripts": {
     "preinstall": "if [ \"$SKIP_PREINSTALL\" != \"true\" ]; then node -e \"if(process.env.npm_execpath.indexOf('pnpm') === -1) throw new Error('You must use pnpm to install dependencies')\"; else echo 'Skipping preinstall script'; fi",
