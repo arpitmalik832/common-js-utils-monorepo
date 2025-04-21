@@ -85,8 +85,6 @@ jobs:
         working-directory: ${{ github.event.inputs.package_name }}
         run: |
           git status
-          git stash pop
-          git status
           if [ "${{ github.event.inputs.build_type }}" = "stage" ]; then
             pnpm build
           else
