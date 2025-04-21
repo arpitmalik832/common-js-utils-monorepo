@@ -2,7 +2,7 @@
  * Test cases for the production redux store.
  * @file This file is saved as `redux/store/prod.test.js`.
  */
-import { slices } from '@arpitmalik832/common-js-utils-pkg';
+import { slices } from '@arpitmalik832/common-js-utils';
 import { sampleQuery } from '../../queries/sampleQuery';
 
 let mockConfigureStore;
@@ -19,7 +19,7 @@ jest.mock('@reduxjs/toolkit', () => ({
   })),
 }));
 
-jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
+jest.mock('@arpitmalik832/common-js-utils', () => ({
   slices: {
     appSlice: { reducer: jest.fn() },
     apisSlice: { reducer: jest.fn() },

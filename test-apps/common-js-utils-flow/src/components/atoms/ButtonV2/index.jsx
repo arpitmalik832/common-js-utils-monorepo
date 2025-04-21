@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { slices } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { slices } from '@arpitmalik832/common-js-utils-flow';
 import { useDispatch } from 'react-redux';
 
 import s from './index.module.scss';

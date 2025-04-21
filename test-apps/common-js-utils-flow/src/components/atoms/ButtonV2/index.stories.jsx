@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ReduxProvider } from '@arpitmalik832/common-js-utils-flow-pkg';
+import { ReduxProvider } from '@arpitmalik832/common-js-utils-flow';
 
 import Button from './index';
 import store from '../../../redux/store/main';

@@ -1,4 +1,4 @@
-// flow-typed signature: 76f26249fb83b6e6fc745bddaa97af48
+// flow-typed signature: 23e4cf089b0b35ad53a743d545856f0e
 // flow-typed version: <<STUB>>/typescript_v^5.7.3/flow_v0.261.2
 
 /**
@@ -31,10 +31,6 @@ declare module 'typescript/lib/_tsserver' {
 }
 
 declare module 'typescript/lib/_typingsInstaller' {
-  declare module.exports: any;
-}
-
-declare module 'typescript/lib/cancellationToken' {
   declare module.exports: any;
 }
 
@@ -71,9 +67,6 @@ declare module 'typescript/lib/_tsserver.js' {
 }
 declare module 'typescript/lib/_typingsInstaller.js' {
   declare module.exports: $Exports<'typescript/lib/_typingsInstaller'>;
-}
-declare module 'typescript/lib/cancellationToken.js' {
-  declare module.exports: $Exports<'typescript/lib/cancellationToken'>;
 }
 declare module 'typescript/lib/tsc.js' {
   declare module.exports: $Exports<'typescript/lib/tsc'>;
