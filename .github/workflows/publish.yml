@@ -6,13 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: 'Package (packages/common-js-utils, packages/common-js-utils-flow)'
+        description: 'Package (packages/common-js-utils, packages/common-js-utils-flow, packages/eslint-config, packages/build-modules)'
         required: true
         default: 'packages/common-js-utils'
         type: 'choice'
         options:
           - packages/common-js-utils
           - packages/common-js-utils-flow
+          - packages/eslint-config
+          - packages/build-modules
       release_type:
         description: 'Release type (release, alpha, beta, rc)'
         required: true
@@ -34,7 +36,7 @@ on:
           - stage
 
 env:
-  PNPM_VERSION: 10.5.0
+  PNPM_VERSION: 10.8.1
   NODE_VERSION: 22
   NX_CACHE_DIRECTORY: .nx-cache
 jobs:
