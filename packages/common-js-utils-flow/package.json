@@ -193,7 +193,7 @@
     "postcss-cli": "^11.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.1.5",
+    "postcss-preset-env": "^10.1.6",
     "prettier": "^3.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
