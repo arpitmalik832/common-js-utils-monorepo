@@ -1,37 +1,37 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'
 
-  - package-ecosystem: "npm"
-    directory: "/packages/common-js-utils"
+  - package-ecosystem: 'npm'
+    directory: '/packages/common-js-utils'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'
 
-  - package-ecosystem: "npm"
-    directory: "/packages/common-js-utils-flow"
+  - package-ecosystem: 'npm'
+    directory: '/packages/common-js-utils-flow'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'
 
-  - package-ecosystem: "npm"
-    directory: "/test-apps/common-js-utils"
+  - package-ecosystem: 'npm'
+    directory: '/test-apps/common-js-utils'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'
 
-  - package-ecosystem: "npm"
-    directory: "/test-apps/common-js-utils-flow"
+  - package-ecosystem: 'npm'
+    directory: '/test-apps/common-js-utils-flow'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-    target-branch: "feature-dependabot"
+      interval: 'weekly'
+    target-branch: 'feature-dependabot'

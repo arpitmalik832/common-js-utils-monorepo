@@ -2,7 +2,7 @@
  * This file contains hooks for making API requests.
  * @file It is saved as `useApiRequest.js`.
  */
-import { handleRequest } from '@arpitmalik832/common-js-utils-pkg';
+import { handleRequest } from '@arpitmalik832/common-js-utils';
 
 /**
  * Custom hook for making API requests with support for aborting requests.

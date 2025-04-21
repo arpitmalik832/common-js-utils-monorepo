@@ -62,6 +62,7 @@ const config = {
         ignoreAtRules: ['if', 'else', 'each'],
       },
     ],
+    'no-duplicate-selectors': null,
   },
   ignoreFiles: [
     '**/*.{mjs,cjs,js,jsx,ts,mdx}',

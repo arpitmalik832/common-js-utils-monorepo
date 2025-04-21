@@ -15,7 +15,7 @@ jest.mock('../../../hooks/useApiRequest', () => ({
 }));
 
 // Mock logsUtils
-jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
+jest.mock('@arpitmalik832/common-js-utils', () => ({
   errorLog: jest.fn(),
 }));
 

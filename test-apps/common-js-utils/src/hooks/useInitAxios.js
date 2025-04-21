@@ -9,7 +9,7 @@ import {
   addRequestInterceptor,
   addResponseInterceptor,
   slices,
-} from '@arpitmalik832/common-js-utils-pkg';
+} from '@arpitmalik832/common-js-utils';
 
 import { DEFAULT_API_TIMEOUT } from '../enums/app';
 

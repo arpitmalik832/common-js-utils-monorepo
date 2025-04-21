@@ -4,7 +4,7 @@
  */
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { log } from '@arpitmalik832/common-js-utils-pkg';
+import { log } from '@arpitmalik832/common-js-utils';
 
 import PageWrapper from '../PageWrapper';
 
@@ -19,7 +19,7 @@ jest.mock('react-router', () => ({
 }));
 
 // Mock the logging function
-jest.mock('@arpitmalik832/common-js-utils-pkg', () => ({
+jest.mock('@arpitmalik832/common-js-utils', () => ({
   log: jest.fn(),
 }));
 
