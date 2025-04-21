@@ -34,7 +34,7 @@ on:
           - stage
 
 env:
-  PNPM_VERSION: 10.5.0
+  PNPM_VERSION: 10.8.1
   NODE_VERSION: 22
   NX_CACHE_DIRECTORY: .nx-cache
 jobs:
