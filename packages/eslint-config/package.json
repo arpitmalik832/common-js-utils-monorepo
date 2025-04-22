@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arpitmalik832/common-js-utils-monorepo"
+    "url": "git+https://github.com/arpitmalik832/common-js-utils-monorepo.git"
   },
   "engines": {
     "node": ">=20.17.0"
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "preinstall": "if [ \"$SKIP_PREINSTALL\" != \"true\" ]; then node -e \"if(process.env.npm_execpath.indexOf('pnpm') === -1) throw new Error('You must use pnpm to install dependencies')\"; else echo 'Skipping preinstall script'; fi",
-    "prepare": "pnpm build",
+    "prepare": "pnpm build:prod",
     "rm-dist": "rimraf dist --glob",
     "rm-types": "rimraf types --glob",
     "rm-node_modules": "rimraf node_modules --glob",
@@ -53,10 +53,10 @@
     "build:prod:visualizer": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_VISUALIZER=true rollup -c rollup.config.js && pnpm generate-declarations",
     "build:prod:buildStats": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_BUILD_STATS=true rollup -c rollup.config.js && pnpm generate-declarations",
     "build:prod:visualizer:buildStats": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_VISUALIZER=true INCLUDE_BUILD_STATS=true rollup -c rollup.config.js && pnpm generate-declarations",
-    "publish:release": "npm publish --access restricted --no-git-checks",
-    "publish:alpha": "npm publish --tag alpha --access restricted --no-git-checks",
-    "publish:beta": "npm publish --tag beta --access restricted --no-git-checks",
-    "publish:rc": "npm publish --tag rc --access restricted --no-git-checks",
+    "publish:release": "gh release create v-eslint-config-$npm_package_version --verify-tag --title \"Release v-eslint-config-$npm_package_version\" --notes \"Release v-eslint-config-$npm_package_version\"",
+    "publish:alpha": "gh release create v-eslint-config-$npm_package_version --verify-tag --prerelease --title \"Release v-eslint-config-$npm_package_version (alpha)\" --notes \"Release v-eslint-config-$npm_package_version (alpha)\"",
+    "publish:beta": "gh release create v-eslint-config-$npm_package_version --verify-tag --prerelease --title \"Release v-eslint-config-$npm_package_version (beta)\" --notes \"Release v-eslint-config-$npm_package_version (beta)\"",
+    "publish:rc": "gh release create v-eslint-config-$npm_package_version --verify-tag --prerelease --title \"Release v-eslint-config-$npm_package_version (rc)\" --notes \"Release v-eslint-config-$npm_package_version (rc)\"",
     "lint-js": "eslint --quiet",
     "lint-js:debug": "eslint --debug",
     "lint-js:print-config": "eslint --print-config eslintConfigProcessed.js",
@@ -103,18 +103,18 @@
     "storybook:build:prod:buildStats": "pnpm build && cross-env APP_ENV=staging LIB_ENV=production STORY_ENV=production INCLUDE_BUILD_STATS=true storybook build",
     "storybook:build:prod:visualizer:buildStats": "pnpm build && cross-env APP_ENV=staging LIB_ENV=production STORY_ENV=production INCLUDE_VISUALIZER=true INCLUDE_BUILD_STATS=true storybook build",
     "storybook:serve": "node scripts/serve_storybook.js",
-    "version-bump:patch:release": "pnpx release-it patch --ci",
-    "version-bump:minor:release": "pnpx release-it minor --ci",
-    "version-bump:major:release": "pnpx release-it major --ci",
-    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci",
-    "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci",
-    "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci",
-    "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci",
-    "version-bump:minor:beta": "pnpx release-it minor prerelease --preRelease=beta --ci",
-    "version-bump:major:beta": "pnpx release-it major prerelease --preRelease=beta --ci",
-    "version-bump:patch:rc": "pnpx release-it patch prerelease --preRelease=rc --ci",
-    "version-bump:minor:rc": "pnpx release-it minor prerelease --preRelease=rc --ci",
-    "version-bump:major:rc": "pnpx release-it major prerelease --preRelease=rc --ci"
+    "version-bump:patch:release": "pnpx release-it patch --ci --verbose",
+    "version-bump:minor:release": "pnpx release-it minor --ci --verbose",
+    "version-bump:major:release": "pnpx release-it major --ci --verbose",
+    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci --verbose",
+    "version-bump:minor:beta": "pnpx release-it minor prerelease --preRelease=beta --ci --verbose",
+    "version-bump:major:beta": "pnpx release-it major prerelease --preRelease=beta --ci --verbose",
+    "version-bump:patch:rc": "pnpx release-it patch prerelease --preRelease=rc --ci --verbose",
+    "version-bump:minor:rc": "pnpx release-it minor prerelease --preRelease=rc --ci --verbose",
+    "version-bump:major:rc": "pnpx release-it major prerelease --preRelease=rc --ci --verbose"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",

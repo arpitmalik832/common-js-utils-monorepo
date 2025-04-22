@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arpitmalik832/common-js-utils-monorepo"
+    "url": "git+https://github.com/arpitmalik832/common-js-utils-monorepo.git"
   },
   "engines": {
     "node": ">=20.17.0"
@@ -107,18 +107,18 @@
     "storybook:build:prod:buildStats": "cross-env STORY_ENV=production INCLUDE_BUILD_STATS=true storybook build",
     "storybook:build:prod:visualizer:buildStats": "cross-env STORY_ENV=production INCLUDE_VISUALIZER=true INCLUDE_BUILD_STATS=true storybook build",
     "storybook:serve": "node scripts/serve_storybook.js",
-    "version-bump:patch:release": "pnpx release-it patch --ci",
-    "version-bump:minor:release": "pnpx release-it minor --ci",
-    "version-bump:major:release": "pnpx release-it major --ci",
-    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci",
-    "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci",
-    "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci",
-    "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci",
-    "version-bump:minor:beta": "pnpx release-it minor prerelease --preRelease=beta --ci",
-    "version-bump:major:beta": "pnpx release-it major prerelease --preRelease=beta --ci",
-    "version-bump:patch:rc": "pnpx release-it patch prerelease --preRelease=rc --ci",
-    "version-bump:minor:rc": "pnpx release-it minor prerelease --preRelease=rc --ci",
-    "version-bump:major:rc": "pnpx release-it major prerelease --preRelease=rc --ci"
+    "version-bump:patch:release": "pnpx release-it patch --ci --verbose",
+    "version-bump:minor:release": "pnpx release-it minor --ci --verbose",
+    "version-bump:major:release": "pnpx release-it major --ci --verbose",
+    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci --verbose",
+    "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci --verbose",
+    "version-bump:minor:beta": "pnpx release-it minor prerelease --preRelease=beta --ci --verbose",
+    "version-bump:major:beta": "pnpx release-it major prerelease --preRelease=beta --ci --verbose",
+    "version-bump:patch:rc": "pnpx release-it patch prerelease --preRelease=rc --ci --verbose",
+    "version-bump:minor:rc": "pnpx release-it minor prerelease --preRelease=rc --ci --verbose",
+    "version-bump:major:rc": "pnpx release-it major prerelease --preRelease=rc --ci --verbose"
   },
   "devDependencies": {
     "@arpitmalik832/build-modules": "workspace:*",
