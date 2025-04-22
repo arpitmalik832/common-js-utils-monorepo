@@ -165,7 +165,7 @@
     "conventional-changelog-cli": "^5.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "eslint": "^9.21.0",
+    "eslint": "^9.25.1",
     "express": "^4.21.2",
     "flow-bin": "^0.268.0",
     "glob": "^11.0.1",

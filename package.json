@@ -104,7 +104,7 @@
     "@release-it/conventional-changelog": "^10.0.0",
     "commitizen": "^4.3.1",
     "conventional-changelog-cli": "^5.0.0",
-    "eslint": "^9.21.0",
+    "eslint": "^9.25.1",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "nx": "^20.4.6",
