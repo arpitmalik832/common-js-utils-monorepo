@@ -13,7 +13,8 @@
     "changelog": "pnpx auto-changelog --stdout --commit-limit false --unreleased --template keepachangelog",
     "requireBranch": false,
     "commit": true,
-    "tag": true
+    "tag": true,
+    "timeout": 300000
   },
   "hooks": {
     "before:init": ["echo 'Starting the version bump process...'"],
