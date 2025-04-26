@@ -6,9 +6,10 @@ permissions:
 on:
   pull_request:
     branches:
-      - development
-      - staging
+      - dev
+      - alpha
       - beta
+      - rc
       - release
       - master
       - 'feature-*'
