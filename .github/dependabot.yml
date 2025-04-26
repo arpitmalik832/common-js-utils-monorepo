@@ -4,46 +4,46 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/packages/build-modules'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/packages/eslint-config'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/packages/common-js-utils'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/packages/common-js-utils-flow'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/test-apps/common-js-utils'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'npm'
     directory: '/test-apps/common-js-utils-flow'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'weekly'
-    target-branch: 'feature/dependabot'
+    target-branch: 'feature-dependabot'
