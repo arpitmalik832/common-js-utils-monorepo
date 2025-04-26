@@ -9,6 +9,10 @@
     "type": "git",
     "url": "git+https://github.com/arpitmalik832/common-js-utils-monorepo.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "engines": {
     "node": ">=20.17.0"
   },
@@ -65,10 +69,10 @@
     "build:prod:visualizer": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_VISUALIZER=true rollup -c rollup.config.js && pnpm update-import-for-mixin && pnpm generate-declarations",
     "build:prod:buildStats": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_BUILD_STATS=true rollup -c rollup.config.js && pnpm update-import-for-mixin && pnpm generate-declarations",
     "build:prod:visualizer:buildStats": "pnpm rm-dist && pnpm rm-types && pnpm build-common && cross-env APP_ENV=staging LIB_ENV=production INCLUDE_VISUALIZER=true INCLUDE_BUILD_STATS=true rollup -c rollup.config.js && pnpm update-import-for-mixin && pnpm generate-declarations",
-    "publish:release": "gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --title \"Release v-common-js-utils-flow-$npm_package_version\" --notes \"Release v-common-js-utils-flow-$npm_package_version\"",
-    "publish:alpha": "gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (alpha)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (alpha)\"",
-    "publish:beta": "gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (beta)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (beta)\"",
-    "publish:rc": "gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (rc)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (rc)\"",
+    "publish:release": "npm publish --no-git-checks && gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --title \"Release v-common-js-utils-flow-$npm_package_version\" --notes \"Release v-common-js-utils-flow-$npm_package_version\"",
+    "publish:alpha": "npm publish --no-git-checks --tag alpha && gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (alpha)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (alpha)\"",
+    "publish:beta": "npm publish --no-git-checks --tag beta && gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (beta)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (beta)\"",
+    "publish:rc": "npm publish --no-git-checks --tag rc && gh release create v-common-js-utils-flow-$npm_package_version --verify-tag --prerelease --title \"Release v-common-js-utils-flow-$npm_package_version (rc)\" --notes \"Release v-common-js-utils-flow-$npm_package_version (rc)\"",
     "flow:check": "flow",
     "flow:check-all": "flow check --all",
     "flow:status": "flow status",
