@@ -26,9 +26,9 @@
       "@semantic-release/git",
       {
         "assets": ["package.json", "CHANGELOG.md"],
-        "message": "bump(main): Bumping eslint-config to ${nextRelease.version}"
+        "message": "bump(main): Bumping test-apps/common-js-utils-flow to ${nextRelease.version}"
       }
     ]
   ],
-  "tagFormat": "v-eslint-config-${version}"
+  "tagFormat": "v-test-apps-common-js-utils-flow-${version}"
 }
