@@ -1,6 +1,6 @@
 {
   "name": "@arpitmalik832/eslint-config",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.2",
   "description": "Custom ESLint configuration for JavaScript/TypeScript projects",
   "type": "module",
   "author": "Arpit Malik",

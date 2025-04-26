@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/arpitmalik832/common-js-utils-monorepo/compare/v-eslint-config-1.0.0-alpha.1...v-eslint-config-1.0.0-alpha.2) (2025-04-26)
+
+### Bug Fixes
+
+- **main:** fixed ci pipeline ([4758fcf](https://github.com/arpitmalik832/common-js-utils-monorepo/commit/4758fcf557499ee19e299f9597503fd88f69a6da))
+- **main:** fixed version bump pipeline ([46779d3](https://github.com/arpitmalik832/common-js-utils-monorepo/commit/46779d3764a8443f951b6b44abb30dc35eb9cffa))
+
 # 1.0.0-alpha.1 (2025-04-26)
 
 ### Bug Fixes
