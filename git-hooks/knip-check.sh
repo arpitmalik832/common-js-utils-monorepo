@@ -9,6 +9,8 @@ echo "\n${Blue}=================================${NC}\n"
 
 echo "${Green}Start - Knipping of the code.${NC}"
 
+pnpm build
+
 pnpm knip:prod:check-files
 KNIP_EXIT_CODE=$?
 

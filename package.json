@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arpitmalik832/common-js-utils-monorepo"
+    "url": "git+https://github.com/arpitmalik832/common-js-utils-monorepo.git"
   },
   "scripts": {
     "preinstall": "if [ \"$SKIP_PREINSTALL\" != \"true\" ]; then node -e \"if(process.env.npm_execpath.indexOf('pnpm') === -1) throw new Error('You must use pnpm to install dependencies')\"; else echo 'Skipping preinstall script'; fi",
@@ -78,18 +78,20 @@
     "storybook:build": "pnpm build:build-modules && pnpm storybook:build:pkg && pnpm storybook:build:test-apps",
     "storybook:build:beta": "pnpm build:build-modules:beta && pnpm storybook:build:pkg:beta && pnpm storybook:build:test-apps:beta",
     "storybook:build:prod": "pnpm build:build-modules:prod && pnpm storybook:build:pkg:prod && pnpm storybook:build:test-apps:prod",
-    "version-bump:patch:release": "pnpx release-it patch --ci",
-    "version-bump:minor:release": "pnpx release-it minor --ci",
-    "version-bump:major:release": "pnpx release-it major --ci",
-    "version-bump:patch:alpha": "pnpx release-it patch prerelease --preRelease=alpha --ci",
-    "version-bump:minor:alpha": "pnpx release-it minor prerelease --preRelease=alpha --ci",
-    "version-bump:major:alpha": "pnpx release-it major prerelease --preRelease=alpha --ci",
-    "version-bump:patch:beta": "pnpx release-it patch prerelease --preRelease=beta --ci",
-    "version-bump:minor:beta": "pnpx release-it minor prerelease --preRelease=beta --ci",
-    "version-bump:major:beta": "pnpx release-it major prerelease --preRelease=beta --ci",
-    "version-bump:patch:rc": "pnpx release-it patch prerelease --preRelease=rc --ci",
-    "version-bump:minor:rc": "pnpx release-it minor prerelease --preRelease=rc --ci",
-    "version-bump:major:rc": "pnpx release-it major prerelease --preRelease=rc --ci"
+    "version-bump:major:release": "semantic-release --release-type major",
+    "version-bump:minor:release": "semantic-release --release-type minor",
+    "version-bump:patch:release": "semantic-release --release-type patch",
+    "version-bump:major:alpha": "semantic-release --release-type major --prerelease alpha",
+    "version-bump:minor:alpha": "semantic-release --release-type minor --prerelease alpha",
+    "version-bump:patch:alpha": "semantic-release --release-type patch --prerelease alpha",
+    "version-bump:major:beta": "semantic-release --release-type major --prerelease beta",
+    "version-bump:minor:beta": "semantic-release --release-type minor --prerelease beta",
+    "version-bump:patch:beta": "semantic-release --release-type patch --prerelease beta",
+    "version-bump:major:rc": "semantic-release --release-type major --prerelease rc",
+    "version-bump:minor:rc": "semantic-release --release-type minor --prerelease rc",
+    "version-bump:patch:rc": "semantic-release --release-type patch --prerelease rc",
+    "version-bump:dry-run": "semantic-release --dry-run",
+    "version-bump:debug": "DEBUG=semantic-release:* semantic-release"
   },
   "devDependencies": {
     "@arpitmalik832/eslint-config": "workspace:*",
@@ -101,7 +103,10 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.21.0",
     "@nx/workspace": "^20.4.6",
-    "@release-it/conventional-changelog": "^10.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
     "commitizen": "^4.3.1",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.21.0",
@@ -109,8 +114,8 @@
     "husky": "^9.1.7",
     "nx": "^20.4.6",
     "prettier": "^3.5.2",
-    "release-it": "^19.0.1",
     "rimraf": "^6.0.1",
+    "semantic-release": "^24.2.3",
     "validate-branch-name": "^1.3.2"
   },
   "packageManager": "pnpm@10.8.1",
