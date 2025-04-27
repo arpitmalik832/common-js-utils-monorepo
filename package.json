@@ -1,6 +1,6 @@
 {
   "name": "common-js-utils-monorepo",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "A Common JS Utils Monorepo",
   "type": "module",
   "author": "Arpit Malik",
