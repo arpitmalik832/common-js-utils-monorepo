@@ -1,6 +1,6 @@
 {
   "name": "@arpitmalik832/common-js-utils-flow",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "common js utils using flow",
   "type": "module",
   "author": "Arpit Malik",
