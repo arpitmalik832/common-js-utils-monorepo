@@ -88,6 +88,7 @@ jobs:
           git status
           git stash
           git status
+          git pull
           pnpm version-bump:${{ github.event.inputs.version_bump_type }}:${{ github.event.inputs.release_type }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
