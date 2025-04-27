@@ -39,6 +39,7 @@ env:
   PNPM_VERSION: 10.8.1
   NODE_VERSION: 22
   NX_CACHE_DIRECTORY: .nx-cache
+  GH_TOKEN: ${{ secrets.GH_TOKEN  }}
 
 jobs:
   publish-rollup-library:
