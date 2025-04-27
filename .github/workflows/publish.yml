@@ -1,12 +1,13 @@
 name: Publish Package
 permissions:
   contents: write
+  packages: write
 
 on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: 'Package (packages/common-js-utils, packages/common-js-utils-flow, packages/eslint-config, packages/build-modules)'
+        description: 'Package to publish'
         required: true
         default: 'packages/common-js-utils'
         type: 'choice'
@@ -16,7 +17,7 @@ on:
           - packages/eslint-config
           - packages/build-modules
       release_type:
-        description: 'Release type (release, alpha, beta, rc)'
+        description: 'Release type'
         required: true
         default: 'alpha'
         type: 'choice'
@@ -26,7 +27,7 @@ on:
           - beta
           - rc
       build_type:
-        description: 'Build type (prod, beta, stage)'
+        description: 'Build type'
         required: true
         default: 'prod'
         type: 'choice'
@@ -39,25 +40,39 @@ env:
   PNPM_VERSION: 10.8.1
   NODE_VERSION: 22
   NX_CACHE_DIRECTORY: .nx-cache
-  GH_TOKEN: ${{ secrets.GH_TOKEN  }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
+  validate-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate package name
+        run: |
+          if [[ ! "${{ github.event.inputs.package_name }}" =~ ^packages/(common-js-utils|common-js-utils-flow|eslint-config|build-modules)$ ]]; then
+            echo "Invalid package name"
+            exit 1
+          fi
+
   publish-rollup-library:
+    needs: validate-inputs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
+
       - name: Installing pnpm ${{ env.PNPM_VERSION }}
         uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
+
       - name: Using Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://npm.pkg.github.com'
           cache: 'pnpm'
+
       - name: Nx cache
         uses: actions/cache@v4
         with:
@@ -66,11 +81,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nx-${{ hashFiles('**/pnpm-lock.yaml') }}-
             ${{ runner.os }}-nx-
+
       - name: Configure Git
         run: |
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: Authenticating with GitHub Packages
         run: |
           # Update only the root .npmrc file since packages use symbolic links
@@ -82,20 +99,45 @@ jobs:
             echo "Root .npmrc file not found, creating it"
             echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
           fi
+
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Publishing the library package
+
+      - name: Build dependencies
+        run: |
+          case "${{ github.event.inputs.package_name }}" in
+            "packages/common-js-utils"|"packages/common-js-utils-flow")
+              echo "Building eslint-config..."
+              cd packages/eslint-config
+              pnpm build:${{ github.event.inputs.build_type }}
+              cd ../..
+              
+              echo "Building build-modules..."
+              cd packages/build-modules
+              pnpm build:${{ github.event.inputs.build_type }}
+              cd ../..
+              ;;
+          esac
+
+      - name: Build and publish package
         working-directory: ${{ github.event.inputs.package_name }}
         run: |
-          git status
+          echo "Building ${{ github.event.inputs.package_name }}..."
           if [ "${{ github.event.inputs.build_type }}" = "stage" ]; then
             pnpm build
           else
             pnpm build:${{ github.event.inputs.build_type }}
           fi
+
+          echo "Publishing package..."
           pnpm publish:${{ github.event.inputs.release_type }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Output package details
+
+      - name: Verify package
         working-directory: ${{ github.event.inputs.package_name }}
-        run: cat package.json
+        run: |
+          echo "Package details:"
+          cat package.json
+          echo "Build output:"
+          ls -la dist/
