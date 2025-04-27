@@ -39,6 +39,7 @@ env:
   PNPM_VERSION: 10.8.1
   NODE_VERSION: 22
   NX_CACHE_DIRECTORY: .nx-cache
+
 jobs:
   publish-rollup-library:
     runs-on: ubuntu-latest
@@ -54,6 +55,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
           cache: 'pnpm'
       - name: Nx cache
         uses: actions/cache@v4
