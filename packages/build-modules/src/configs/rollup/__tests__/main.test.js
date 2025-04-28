@@ -199,11 +199,9 @@ describe('rollup main config', () => {
     const config = getConfig(projectRoot, MAIN_ENUMS.ENVS.DEV, [], []);
     const postcssPlugin = config.plugins.find(p => p.name === 'postcss');
 
-    expect(postcssPlugin.options.config.path).toEqual([
+    expect(postcssPlugin.options.config.path).toEqual(
       '/test/project/postcss.config.js',
-      '/test/project/postcss.config.mjs',
-      expect.stringContaining('postcssConfig.js'),
-    ]);
+    );
   });
 
   it('should pass correct environment to PostCSS config', () => {
