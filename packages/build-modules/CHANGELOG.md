@@ -1,3 +1,11 @@
+# [1.0.0-alpha.2](https://github.com/arpitmalik832/common-js-utils-monorepo/compare/v-build-modules-1.0.0-alpha.1...v-build-modules-1.0.0-alpha.2) (2025-04-28)
+
+### Bug Fixes
+
+- **main:** fixed the build-modules rollup config for postcss plugin ([b62f2a4](https://github.com/arpitmalik832/common-js-utils-monorepo/commit/b62f2a406ebc1a2addf73091b2e78a5b6cefbf12))
+- **main:** fixed the publish pipeline ([e9a6470](https://github.com/arpitmalik832/common-js-utils-monorepo/commit/e9a647064aaf6dd9156f634eabd5d35c18a058c8))
+- **main:** fixed the version bump pipeline ([dee4d0d](https://github.com/arpitmalik832/common-js-utils-monorepo/commit/dee4d0d43ea43e9df927ec814cdc2dde9429b6ea))
+
 # 1.0.0-alpha.1 (2025-04-27)
 
 ### Bug Fixes
