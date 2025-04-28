@@ -83,11 +83,10 @@ function getConfig(
         modules: true,
         use: ['sass'],
         config: {
-          path: [
-            `${projectRoot}/postcss.config.js`,
-            `${projectRoot}/postcss.config.mjs`,
+          path:
+            `${projectRoot}/postcss.config.js` ??
+            `${projectRoot}/postcss.config.mjs` ??
             path.resolve(dirname, '../postcssConfig.js'),
-          ],
           ctx: {
             env: [MAIN_ENUMS.ENVS.PROD, MAIN_ENUMS.ENVS.BETA].includes(env)
               ? MAIN_ENUMS.ENVS.PROD

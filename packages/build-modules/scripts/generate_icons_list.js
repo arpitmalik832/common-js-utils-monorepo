@@ -62,8 +62,9 @@ function main() {
     process.exit(1);
   }
 
-  console.log('Generating icons list for project:', projectRoot);
-  const paths = getPaths(projectRoot);
+  const projectRootTrimmed = projectRoot.trim();
+  console.log('Generating icons list for project:', projectRootTrimmed);
+  const paths = getPaths(projectRootTrimmed);
   console.log('Icons path:', paths.iconsPath);
   console.log('Icons list path:', paths.iconsListPath);
   processIcons(paths.iconsPath, paths.iconsListPath);
