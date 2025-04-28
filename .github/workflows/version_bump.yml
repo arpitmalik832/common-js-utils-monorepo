@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       package_name:
-        description: 'Package (/, packages/build-modules, packages/eslint-config, packages/common-js-utils, packages/common-js-utils-flow, test-apps/common-js-utils, test-apps/common-js-utils-flow)'
+        description: 'Package to bump version'
         required: true
         default: 'packages/common-js-utils'
         type: 'choice'
@@ -19,7 +19,7 @@ on:
           - test-apps/common-js-utils
           - test-apps/common-js-utils-flow
       version_bump_type:
-        description: 'Version bump type (patch, minor, major)'
+        description: 'Version bump type'
         required: true
         default: 'patch'
         type: 'choice'
@@ -28,7 +28,7 @@ on:
           - minor
           - major
       release_type:
-        description: 'Release type (release, alpha, beta, rc)'
+        description: 'Release type'
         required: true
         default: 'alpha'
         type: 'choice'
@@ -76,12 +76,19 @@ jobs:
           fi
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
+      - name: Installing Cypress binary
+        run: pnpx cypress install
+      - name: Installing Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
       - name: Bumping the version
         working-directory: ${{ github.event.inputs.package_name }}
         run: |
           git status
           git stash
           git status
+          git pull
           pnpm version-bump:${{ github.event.inputs.version_bump_type }}:${{ github.event.inputs.release_type }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
