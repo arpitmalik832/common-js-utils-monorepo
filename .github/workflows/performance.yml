@@ -88,7 +88,7 @@ jobs:
           echo "$ESCAPED_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       - name: Upload benchmark files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: benchmark-files-${{ github.run_id }}
           path: |
